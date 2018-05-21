@@ -1,0 +1,364 @@
+package com.smyhvae.util;
+
+
+import android.content.Context;
+import android.database.Cursor;
+
+import com.smyhvae.model.FuAccountModel;
+import com.smyhvae.model.FuAuthorityModel;
+import com.smyhvae.model.FuBaseModel;
+import com.smyhvae.model.FuInventoryBankAccountModel;
+import com.smyhvae.model.FuMoneyModel;
+import com.smyhvae.model.FuSalesBillDetailModel;
+import com.smyhvae.model.FuSalesBillModel;
+import com.smyhvae.model.FuSizeModel;
+import com.smyhvae.model.FuStaffModel;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Print {
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    BigDecimalUtil bigDecimalUtil = new BigDecimalUtil();
+    public String doPrint(Context context, String result, FuAccountModel accountModel, int amountSum, FuStaffModel staffModel, BigDecimal totalSum, String qrcodewx){
+        DataUtil dataUtil = new DataUtil();
+        FuBaseModel baseModel = dataUtil.message(result);
+        if (baseModel.getResultCode().intValue() ==1){
+            FuSalesBillModel salesBillModel = dataUtil.getSalesBillData(result);
+//            setSpecialSizeTileData(salesBillModel);
+            JSONObject resJsonObj = new JSONObject();
+            JSONArray arryList = new JSONArray();
+
+            try {
+                List<FuSalesBillDetailModel> salesBillDetailModelList = salesBillModel.getFuSalesBillDetailList();
+                for (FuSalesBillDetailModel salesBillDetailModel : salesBillDetailModelList){
+                    JSONObject model = new JSONObject();
+                    if (salesBillDetailModel.getStylecolorsizeid() != null){
+                        model.put("amount", salesBillDetailModel.getAmount().toString());
+                        model.put("remark", salesBillDetailModel.getRemark() == null ? "" : salesBillDetailModel.getRemark());
+                        model.put("code", salesBillDetailModel.getStyleCode());
+                        model.put("price", bigDecimalUtil.getStringUtil(salesBillDetailModel.getPrice().toString()));
+                        model.put("discount", bigDecimalUtil.getStringUtil(salesBillDetailModel.getDiscount().toString()));
+                        model.put("stylecolorsizeid", salesBillDetailModel.getStylecolorsizeid().toString());
+                        model.put("sizeString", salesBillDetailModel.getSizeString());
+                        model.put("colorString", salesBillDetailModel.getColorString());
+                        model.put("total", bigDecimalUtil.getStringUtil(salesBillDetailModel.getTotal().toString()));
+                        model.put("originalprice", bigDecimalUtil.getStringUtil(salesBillDetailModel.getOriginalprice().toString()));
+                        model.put("name", salesBillDetailModel.getStyleString());
+                        model.put("standardbarcode", salesBillDetailModel.getStandardbarcode());
+                    }else {
+                        model.put("amount", salesBillDetailModel.getAmount().toString());
+                        model.put("remark", salesBillDetailModel.getRemark() == null ? "" : salesBillDetailModel.getRemark());
+                        model.put("code", "");
+                        model.put("price", bigDecimalUtil.getStringUtil(salesBillDetailModel.getPrice().toString()));
+                        model.put("discount", bigDecimalUtil.getStringUtil(salesBillDetailModel.getDiscount().toString()));
+                        model.put("total", bigDecimalUtil.getStringUtil(salesBillDetailModel.getTotal().toString()));
+                        model.put("originalprice", bigDecimalUtil.getStringUtil(salesBillDetailModel.getOriginalprice().toString()));
+                        model.put("name", salesBillDetailModel.getStyleString());
+                        model.put("standardbarcode", salesBillDetailModel.getStandardbarcode());
+                    }
+                    arryList.put(model);
+                    resJsonObj.put("details", arryList);
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            DatabaseHelper db =  new DatabaseHelper(context);
+            String sql = "select * from fu_parameter ";
+            Cursor cursor = db.queryParameter(sql, null);
+            while (cursor.moveToNext()){
+                String name = cursor.getString(cursor.getColumnIndex("name"));
+                String val = cursor.getString(cursor.getColumnIndex("val"));
+                try {
+                    resJsonObj.put(name, val);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            db.close();
+            try {
+                resJsonObj.put("code", salesBillModel.getCode().toString());
+                resJsonObj.put("verificationmoney", salesBillModel.getVerificationmoney().toString());
+                JSONArray arrayVerified = new JSONArray();
+                for (FuSalesBillModel fuSalesBillModel : salesBillModel.getVerifiedSalesBillList()){
+                    JSONObject verifiedObject = new JSONObject();
+                    verifiedObject.put("code", fuSalesBillModel.getCode().toString());
+                    verifiedObject.put("amount", fuSalesBillModel.getAmount().toString());
+                    verifiedObject.put("occurrenceTime", sdf.format(fuSalesBillModel.getOccurrencetime()));
+                    verifiedObject.put("invString", fuSalesBillModel.getInvString());
+                    verifiedObject.put("preSalesTotal", bigDecimalUtil.getStringUtil(fuSalesBillModel.getPreSalesTotal().toString()));
+                    arrayVerified.put(verifiedObject);
+                    resJsonObj.put("verifiedSalesBillList", arrayVerified);
+                }
+                resJsonObj.put("autofixdiscount", accountModel.getAutofixdiscount().toString());
+                JSONArray arrySize = new JSONArray();
+                for (FuSizeModel fuSizeModel : salesBillModel.getSizeListForGroup()){
+                    JSONObject sizeObject = new JSONObject();
+                    sizeObject.put("id", fuSizeModel.getId().toString());
+                    sizeObject.put("name", fuSizeModel.getName());
+                    arrySize.put(sizeObject);
+                    resJsonObj.put("sizeList", arrySize);
+                }
+                resJsonObj.put("amountSum", String.valueOf(amountSum));
+                resJsonObj.put("occurrenceTime", sdf.format(salesBillModel.getOccurrencetime()));
+                resJsonObj.put("collectionmoney", salesBillModel.getCollectionmoney().toString());
+                resJsonObj.put("needprintarrears", accountModel.getNeedprintarrears().toString());
+                resJsonObj.put("printrealalipay", staffModel.getFuInventoryList().get(0).getPrintrealalipay());
+                resJsonObj.put("type", salesBillModel.getType().toString());
+                resJsonObj.put("arrears", salesBillModel.getArrears().toString());
+                resJsonObj.put("qrcodewx", qrcodewx);
+                resJsonObj.put("invString", salesBillModel.getInvString());
+                resJsonObj.put("staffString", salesBillModel.getStaffString() == null ? "" : salesBillModel.getStaffString());
+                resJsonObj.put("wechatpaystring", staffModel.getFuInventoryList().get(0).getWechatpaystring());
+                resJsonObj.put("alipay", staffModel.getFuInventoryList().get(0).getAlipay());
+                resJsonObj.put("realalipay", staffModel.getFuInventoryList().get(0).getRealalipay());
+                resJsonObj.put("wechatpay", staffModel.getFuInventoryList().get(0).getWechatpay());
+                resJsonObj.put("clientString", salesBillModel.getClientString());
+                resJsonObj.put("header", staffModel.getFuInventoryList().get(0).getWechat());
+                resJsonObj.put("remarkSum", salesBillModel.getRemark() == null ? "" : salesBillModel.getRemark());
+                resJsonObj.put("invAddress", staffModel.getFuInventoryList().get(0).getAddress());
+                resJsonObj.put("header2", staffModel.getFuInventoryList().get(0).getTitle2());
+                JSONArray arrayAuthority = new JSONArray();
+                for(FuAuthorityModel fuAuthorityModel : staffModel.getFuAuthorityList()){
+                    JSONObject authorityObject = new JSONObject();
+                    authorityObject.put("id", fuAuthorityModel.getId().toString());
+                    arrayAuthority.put(authorityObject);
+                    resJsonObj.put("fuAuthorityList", arrayAuthority);
+                }
+                JSONArray arryMoney = new JSONArray();
+                for (FuMoneyModel fuMoneyModel : salesBillModel.getFuMoneyList()){
+                    JSONObject moneyObject = new JSONObject();
+                    moneyObject.put("money", fuMoneyModel.getMoney().toString());
+                    moneyObject.put("moneyaccountid", fuMoneyModel.getMoneyaccountid().toString());
+                    moneyObject.put("name", fuMoneyModel.getPaymentString());
+                    moneyObject.put("paymentid", fuMoneyModel.getPaymentid().toString());
+                    moneyObject.put("moneyaccountString", fuMoneyModel.getMoneyaccountString());
+                    arryMoney.put(moneyObject);
+                    resJsonObj.put("moneyList", arryMoney);
+                }
+
+                JSONArray arryCutMoney = new JSONArray();
+                for (FuSalesBillDetailModel fuSalesBillDetailModel : salesBillModel.getCutMoneyList()){
+                    JSONObject cutMoneyObject = new JSONObject();
+                    cutMoneyObject.put("money", fuSalesBillDetailModel.getTotal());
+                    cutMoneyObject.put("name", fuSalesBillDetailModel.getStyleString());
+                    arryCutMoney.put(cutMoneyObject);
+                    resJsonObj.put("cutMoneyList", arryCutMoney);
+                }
+
+                resJsonObj.put("realalipaystring", staffModel.getFuInventoryList().get(0).getRealalipaystring());
+                List<FuInventoryBankAccountModel> inventoryBankAccountModelList = staffModel.getFuInventoryList().get(0).getFuInventoryBankAccountList();
+                JSONArray arryBank = new JSONArray();
+                for (FuInventoryBankAccountModel fuInventoryBankAccountModel : inventoryBankAccountModelList){
+                    JSONObject bankObject = new JSONObject();
+                    bankObject.put("optime", sdf.format(fuInventoryBankAccountModel.getOptime()));
+                    bankObject.put("accountid", fuInventoryBankAccountModel.getAccountid().toString());
+                    bankObject.put("id", fuInventoryBankAccountModel.getId().toString());
+                    bankObject.put("opid", fuInventoryBankAccountModel.getOpid().toString());
+                    bankObject.put("flag", fuInventoryBankAccountModel.getFlag().toString());
+                    bankObject.put("cardname", fuInventoryBankAccountModel.getCardname().toString());
+                    bankObject.put("name", fuInventoryBankAccountModel.getName());
+                    bankObject.put("invid", fuInventoryBankAccountModel.getInvid().toString());
+                    arryBank.put(bankObject);
+                    resJsonObj.put("bankAccountList", arryBank);
+                }
+                resJsonObj.put("printwechatpay", staffModel.getFuInventoryList().get(0).getPrintwechatpay().toString());
+                resJsonObj.put("totalSum", bigDecimalUtil.getStringUtil(totalSum.toString()));
+                resJsonObj.put("cellphone", staffModel.getFuInventoryList().get(0).getCellphone());
+                resJsonObj.put("accountname", staffModel.getFuInventoryList().get(0).getAccountname());
+                resJsonObj.put("appversion", "1.00");
+                resJsonObj.put("isSalesOrderBill", "0");
+                resJsonObj.put("epid", accountModel.getEpid().toString());
+                if (accountModel.getColorsizemode().intValue()==0){
+                    resJsonObj.put("isColorSizeMode", "1");
+                }else if(accountModel.getColorsizemode().intValue()==1){
+                    resJsonObj.put("isColorSizeMode", "0");
+                }
+
+                List<FuSalesBillDetailModel> detailsForSpecialSizeTitle = setSpecialSizeTileData(salesBillModel);
+                JSONArray detailsArray = new JSONArray();
+                for (FuSalesBillDetailModel detail : detailsForSpecialSizeTitle){
+                    JSONObject detailsListObject = new JSONObject();
+                    JSONArray detailsListArray = new JSONArray();
+                    detailsListObject.put("discount", detail.getDiscount().toString());
+                    if (detail.getSizeModelList() != null){
+                        for (FuSizeModel sizeModel : detail.getSizeModelList()){
+                            JSONObject sizeObject = new JSONObject();
+                            sizeObject.put("sizeid", sizeModel.getSizeid().toString());
+                            sizeObject.put("amount", sizeModel.getAmount().toString());
+                            sizeObject.put("sizeString", sizeModel.getName());
+                            detailsListArray.put(sizeObject);
+                        }
+                        detailsListObject.put("sizeAmountList", detailsListArray);
+                        detailsListObject.put("colorid", detail.getColorid().toString());
+                        detailsListObject.put("total", bigDecimalUtil.getStringUtil(detail.getTotal().toString()));
+                        detailsListObject.put("totalSizeAmount", detail.getTotalSizeAmount().toString());
+                        detailsListObject.put("originalprice", bigDecimalUtil.getStringUtil(detail.getOriginalprice().toString()));
+                        detailsListObject.put("styleid", detail.getStyleid().toString());
+                        detailsListObject.put("code", detail.getStyleCode());
+                        detailsListObject.put("price", bigDecimalUtil.getStringUtil(detail.getPrice().toString()));
+                        detailsListObject.put("remark", detail.getRemark());
+                        detailsListObject.put("name", detail.getStyleString());
+                        detailsListObject.put("colorString", detail.getColorString());
+                    }else {
+                        detailsListObject.put("total", bigDecimalUtil.getStringUtil(detail.getTotal().toString()));
+                        detailsListObject.put("totalSizeAmount", detail.getTotalSizeAmount().toString());
+                        detailsListObject.put("originalprice", bigDecimalUtil.getStringUtil(detail.getOriginalprice().toString()));
+                        detailsListObject.put("code", detail.getStyleCode());
+                        detailsListObject.put("price", bigDecimalUtil.getStringUtil(detail.getPrice().toString()));
+                        detailsListObject.put("remark", detail.getRemark());
+                        detailsListObject.put("name", detail.getStyleString());
+                        detailsListObject.put("colorString", detail.getColorString());
+                    }
+
+                    detailsArray.put(detailsListObject);
+                }
+                resJsonObj.put("detailsForSpecialSizeTitle", detailsArray);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return resJsonObj.toString();
+        }else {
+            return null;
+        }
+    }
+
+    public List<FuSalesBillDetailModel> setSpecialSizeTileData(FuSalesBillModel salesBillModel){
+
+        List<FuSalesBillDetailModel> detailsForSpecialSizeTitle  = new ArrayList<>();
+        for (FuSalesBillDetailModel detail : salesBillModel.getFuSalesBillDetailList()){
+
+            FuSalesBillDetailModel one = null;
+            if (detail.getStylecolorsizeid() != null){
+
+                for (FuSalesBillDetailModel existOne : detailsForSpecialSizeTitle ){
+                    if (existOne.getColorid().equals(detail.getColorid()) && existOne.getStyleid().equals(detail.getStyleid())){
+                        one = existOne ;
+                    }
+                }
+
+                if (one == null){
+                    one = new FuSalesBillDetailModel();
+                    one.setStyleid(detail.getStyleid());
+                    one.setColorid(detail.getColorid());
+
+                    if (detail.getStylecolorsizeid() != null) {
+                        String appendString = "";
+                        if (detail.getSalesCount() != null){
+                            if (detail.getSalesCount().intValue() == 0) {
+
+                            }else if(detail.getSalesCount().intValue() == 1){
+                                if (detail.getTotal().intValue() > 0) {
+                                    appendString = "(补)" + appendString;
+                                }
+                            }else if (detail.getSalesCount().intValue() >1){
+                                appendString = "(补)" + appendString;
+                            }
+                            if (detail.getTotal().doubleValue() < 0) {
+                                appendString = "退" + appendString;
+                            }
+                        }
+                        one.setStyleCode(appendString+detail.getStyleCode());
+                    }else{
+                        one.setStyleCode("");
+                    }
+
+                    one.setStyleString(detail.getStyleString());
+
+                    one.setColorString(detail.getColorString());
+
+                    List<FuSizeModel> sizeAmountList = new ArrayList<>();
+
+                    FuSizeModel sizeAmount = new FuSizeModel();
+
+                    sizeAmount.setSizeid(detail.getSizeid());
+
+                    sizeAmount.setName(detail.getSizeString());
+
+                    sizeAmount.setAmount(detail.getAmount());
+
+                    sizeAmountList.add(sizeAmount);
+
+                    one.setSizeModelList(sizeAmountList);
+
+                    one.setPrice(detail.getPrice());
+
+                    one.setDiscount(detail.getDiscount());
+
+                    one.setRemark(detail.getRemark() == null ? "" : detail.getRemark());
+
+                    one.setOriginalprice(detail.getOriginalprice());
+
+                    detailsForSpecialSizeTitle .add(one);
+
+                }else {
+                    FuSizeModel oneSizeAmount = null;
+
+                    for (FuSizeModel existOneSizeAmount : one.getSizeModelList()) {
+                        if (existOneSizeAmount.getSizeid().intValue() == detail.getSizeid().intValue()) {
+                            oneSizeAmount = existOneSizeAmount;
+                            break;
+                        }
+                    }
+
+                    if (oneSizeAmount == null) {
+                        FuSizeModel sizeAmount = new FuSizeModel();
+                        sizeAmount.setSizeid(detail.getSizeid());
+                        sizeAmount.setName(detail.getSizeString());
+                        sizeAmount.setAmount(detail.getAmount());
+                        one.getSizeModelList().add(sizeAmount);
+                    }else{
+                        oneSizeAmount.setAmount(oneSizeAmount.getAmount().intValue() + detail.getAmount().intValue());
+                    }
+                }
+
+            }else{
+                one = new FuSalesBillDetailModel();
+
+                one.setStyleCode("");
+
+                one.setStyleString(detail.getStyleString());
+
+                one.setColorString("");
+
+                one.setSizeModelList(null);
+
+                one.setPrice(new BigDecimal(0));
+
+                one.setDiscount(new BigDecimal(0));
+
+                one.setRemark("");
+
+                one.setOriginalprice(new BigDecimal(0));
+
+                detailsForSpecialSizeTitle.add(one);
+            }
+
+            Integer totalSizeAmount = 0;
+
+            if (one.getSizeModelList() != null){
+                for (FuSizeModel sizeAmount : one.getSizeModelList()) {
+                    totalSizeAmount += sizeAmount.getAmount().intValue();
+                }
+            }
+            one.setTotalSizeAmount(totalSizeAmount);
+            if (one.getTotal() != null){
+                one.setTotal(one.getTotal().add(detail.getTotal()));
+            }else {
+                one.setTotal(detail.getTotal());
+            }
+        }
+
+        return detailsForSpecialSizeTitle;
+    }
+
+}

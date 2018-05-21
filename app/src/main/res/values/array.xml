@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spingstatus">
+        <item>上下架</item>
+        <item>上架</item>
+        <item>下架</item>
+    </string-array>
+    <string-array name="spingseason">
+        <item>春季</item>
+        <item>夏季</item>
+        <item>秋季</item>
+        <item>冬季</item>
+        <item>春秋季</item>
+        <item>秋冬季</item>
+        <item></item>
+    </string-array>
+
+    <string-array name="billstatus">
+        <item>全部</item>
+        <item>正常</item>
+        <item>作废</item>
+        <item>挂单</item>
+        <item>未结</item>
+    </string-array>
+</resources>

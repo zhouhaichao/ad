@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    
+    <com.smyhvae.view.SwipeListLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/SLL_item">
+        
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:id="@+id/TV_delete"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:text="删除"
+            android:background="@color/delete"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_margin="5dp"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="center"
+                    android:id="@+id/IV_logo"
+                    android:background="@drawable/nopic_big"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/TV_styleCode"
+                            style="@style/TextView"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/TV_styleName"
+                            style="@style/TextView"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"/>
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:layout_marginEnd="10dp"
+                            android:padding="1dp"
+                            android:textSize="14sp"
+                            android:gravity="center"
+                            android:id="@+id/ET_remark"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/TV_styleColor"
+                            style="@style/TextView"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/TV_styleSize"
+                            style="@style/TextView"/>
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:gravity="center"
+                            android:textSize="14sp"
+                            android:padding="1dp"
+                            android:id="@+id/ET_amount"/>
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginRight="2dp"
+                            android:padding="1dp"
+                            android:gravity="center"
+                            android:textSize="14sp"
+                            android:id="@+id/ET_price"/>
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:padding="1dp"
+                            android:textSize="14sp"
+                            android:gravity="center"
+                            android:id="@+id/ET_discount"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:textSize="14sp"
+                            android:lines="2"
+                            android:ellipsize="end"
+                            android:id="@+id/TV_total"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        
+    </com.smyhvae.view.SwipeListLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/border_clo"/>
+
+</LinearLayout>

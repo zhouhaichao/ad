@@ -1,0 +1,296 @@
+package com.smyhvae.model;
+
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * Created by Administrator on 2017/10/16.
+ */
+
+public class FuStyleModel extends FuBaseModel {
+    private String code;
+    private String codesearchkey;
+    private String searchkey;
+    private String season;
+    private Integer brandid;
+    private Integer clientid;
+    private String barcode;
+    private Date marketdate;
+    private BigDecimal price;
+    private BigDecimal lastprice;
+    private Integer status;
+    private String standardbarcode;
+    private String suppliercode;
+
+    private Integer colorid;
+    private Integer sizeid;
+    private Integer sumAmount;//一个款对应的总库存
+
+    private Integer salesCount;//上货次数
+    //private Integer salesCountForCopy;//上货次数
+    private Integer salesAmount;//上货数量
+    //private Integer salesAmountForCopy;//上货数量
+    private Integer cancelAmount;
+
+    private String brandString;
+    private String clientString;
+    private String colorString;
+    private String sizeString;
+    private Integer amount;
+    private List<FuStylePriceTypeModel> fuStylePriceTypeModelList;
+    private List<FuStyleClassModel> fuStyleClassModelList;
+    private List<FuStyleColorModel> resultStyleColorModelList;
+    private List<FuStyleSizeModel> resultStyleSizeModelList;
+    private List<FuStockModel> fuStockList;
+    private List<FuStyleBarcodeInfoModel> fuStyleBarcodeInfoList;
+    private List<FuStyleImageModel> fuStyleImageModelList;
+
+    public List<FuStyleImageModel> getFuStyleImageModelList() {
+        return fuStyleImageModelList;
+    }
+
+    public Integer getSalesCount() {
+        return salesCount;
+    }
+
+    public void setSalesCount(Integer salesCount) {
+        this.salesCount = salesCount;
+    }
+
+    public Integer getSalesAmount() {
+        return salesAmount;
+    }
+
+    public void setSalesAmount(Integer salesAmount) {
+        this.salesAmount = salesAmount;
+    }
+
+    public Integer getCancelAmount() {
+        return cancelAmount;
+    }
+
+    public void setCancelAmount(Integer cancelAmount) {
+        this.cancelAmount = cancelAmount;
+    }
+
+    public void setFuStyleImageModelList(List<FuStyleImageModel> fuStyleImageModelList) {
+        this.fuStyleImageModelList = fuStyleImageModelList;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getCodesearchkey() {
+        return codesearchkey;
+    }
+
+    public void setCodesearchkey(String codesearchkey) {
+        this.codesearchkey = codesearchkey;
+    }
+
+    public String getSearchkey() {
+        return searchkey;
+    }
+
+    public void setSearchkey(String searchkey) {
+        this.searchkey = searchkey;
+    }
+
+    public String getSeason() {
+        return season;
+    }
+
+    public void setSeason(String season) {
+        this.season = season;
+    }
+
+    public Integer getBrandid() {
+        return brandid;
+    }
+
+    public void setBrandid(Integer brandid) {
+        this.brandid = brandid;
+    }
+
+    public Integer getClientid() {
+        return clientid;
+    }
+
+    public void setClientid(Integer clientid) {
+        this.clientid = clientid;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+
+    public Date getMarketdate() {
+        return marketdate;
+    }
+
+    public void setMarketdate(Date marketdate) {
+        this.marketdate = marketdate;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getLastprice() {
+        return lastprice;
+    }
+
+    public void setLastprice(BigDecimal lastprice) {
+        this.lastprice = lastprice;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getStandardbarcode() {
+        return standardbarcode;
+    }
+
+    public void setStandardbarcode(String standardbarcode) {
+        this.standardbarcode = standardbarcode;
+    }
+
+    public String getSuppliercode() {
+        return suppliercode;
+    }
+
+    public void setSuppliercode(String suppliercode) {
+        this.suppliercode = suppliercode;
+    }
+
+    public Integer getColorid() {
+        return colorid;
+    }
+
+    public void setColorid(Integer colorid) {
+        this.colorid = colorid;
+    }
+
+    public Integer getSizeid() {
+        return sizeid;
+    }
+
+    public void setSizeid(Integer sizeid) {
+        this.sizeid = sizeid;
+    }
+
+    public Integer getSumAmount() {
+        return sumAmount;
+    }
+
+    public void setSumAmount(Integer sumAmount) {
+        this.sumAmount = sumAmount;
+    }
+
+    public String getBrandString() {
+        return brandString;
+    }
+
+    public void setBrandString(String brandString) {
+        this.brandString = brandString;
+    }
+
+    public String getClientString() {
+        return clientString;
+    }
+
+    public void setClientString(String clientString) {
+        this.clientString = clientString;
+    }
+
+    public String getColorString() {
+        return colorString;
+    }
+
+    public void setColorString(String colorString) {
+        this.colorString = colorString;
+    }
+
+    public String getSizeString() {
+        return sizeString;
+    }
+
+    public void setSizeString(String sizeString) {
+        this.sizeString = sizeString;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    public List<FuStylePriceTypeModel> getFuStylePriceTypeModelList() {
+        return fuStylePriceTypeModelList;
+    }
+
+    public void setFuStylePriceTypeModelList(List<FuStylePriceTypeModel> fuStylePriceTypeModelList) {
+        this.fuStylePriceTypeModelList = fuStylePriceTypeModelList;
+    }
+
+    public List<FuStyleClassModel> getFuStyleClassModelList() {
+        return fuStyleClassModelList;
+    }
+
+    public void setFuStyleClassModelList(List<FuStyleClassModel> fuStyleClassModelList) {
+        this.fuStyleClassModelList = fuStyleClassModelList;
+    }
+
+    public List<FuStyleColorModel> getResultStyleColorModelList() {
+        return resultStyleColorModelList;
+    }
+
+    public void setResultStyleColorModelList(List<FuStyleColorModel> resultStyleColorModelList) {
+        this.resultStyleColorModelList = resultStyleColorModelList;
+    }
+
+    public List<FuStyleSizeModel> getResultStyleSizeModelList() {
+        return resultStyleSizeModelList;
+    }
+
+    public void setResultStyleSizeModelList(List<FuStyleSizeModel> resultStyleSizeModelList) {
+        this.resultStyleSizeModelList = resultStyleSizeModelList;
+    }
+
+    public List<FuStockModel> getFuStockList() {
+        return fuStockList;
+    }
+
+    public void setFuStockList(List<FuStockModel> fuStockList) {
+        this.fuStockList = fuStockList;
+    }
+
+    public List<FuStyleBarcodeInfoModel> getFuStyleBarcodeInfoList() {
+        return fuStyleBarcodeInfoList;
+    }
+
+    public void setFuStyleBarcodeInfoList(List<FuStyleBarcodeInfoModel> fuStyleBarcodeInfoList) {
+        this.fuStyleBarcodeInfoList = fuStyleBarcodeInfoList;
+    }
+}

@@ -1,0 +1,77 @@
+package com.smyhvae.model;
+
+import java.math.BigDecimal;
+
+/**
+ * Created by Administrator on 2017/10/21.
+ */
+
+public class FuStylePriceTypeModel extends FuBaseModel {
+    private Integer styleid;
+    private Integer pricetypeid;
+    private BigDecimal price;
+    private BigDecimal ratio;
+
+    private String pricetypeString;
+    private Integer status;
+
+    public Integer getStyleid() {
+        return styleid;
+    }
+
+    public void setStyleid(Integer styleid) {
+        this.styleid = styleid;
+    }
+
+    public Integer getPricetypeid() {
+        return pricetypeid;
+    }
+
+    public void setPricetypeid(Integer pricetypeid) {
+        this.pricetypeid = pricetypeid;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getRatio() {
+        return ratio;
+    }
+
+    public void setRatio(BigDecimal ratio) {
+        this.ratio = ratio;
+    }
+
+    public String getPricetypeString() {
+        return pricetypeString;
+    }
+
+    public void setPricetypeString(String pricetypeString) {
+        this.pricetypeString = pricetypeString;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "FuStylePriceTypeModel{" +
+                "styleid=" + styleid +
+                ", pricetypeid=" + pricetypeid +
+                ", price=" + price +
+                ", ratio=" + ratio +
+                ", pricetypeString='" + pricetypeString + '\'' +
+                ", status=" + status +
+                '}';
+    }
+}
