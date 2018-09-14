@@ -23,11 +23,11 @@ android {
     buildTypes {
 
         debug {
+            applicationIdSuffix '.debug'
             minifyEnabled false
             buildConfigField "boolean", "LOG_DEBUG", "true"
             signingConfig signingConfigs.release
             manifestPlaceholders = [app_name: "启豹店员测试版"]
-            applicationIdSuffix '.debug'
         }
 
         release {
@@ -55,6 +55,7 @@ dependencies {
     compile files('libs/gson-2.2.3.jar')
     compile files('libs/nineoldandroids-2.4.0.jar')
     compile files('libs/SQLiteStudioRemote.jar')
+    compile files('libs/gprintersdkv1.jar')
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:26.0.0-alpha1'

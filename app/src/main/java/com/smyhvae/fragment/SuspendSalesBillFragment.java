@@ -95,9 +95,6 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class SuspendSalesBillFragment extends Fragment implements View.OnClickListener {
-
-
-
     private LinearLayout LL_ACclient, RL_ACstyle;
 
     private MyApplication application;

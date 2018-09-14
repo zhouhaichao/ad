@@ -1,0 +1,245 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:2:1-75:12
+	package
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:3:5-40
+		INJECTED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml
+		INJECTED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml
+		INJECTED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:2:11-69
+	android:versionCode
+		INJECTED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml
+		INJECTED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml
+uses-permission#android.permission.INTERNET
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:5:5-67
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:5:22-64
+application
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:7:5-73:19
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\1699383e453bcaf6029f0e8700f01c9ac64c052f\output\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:design:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\a37d6615f36a6f46a54ffb816d511ac37a7eff4e\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:appcompat-v7:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\f0235b16e36bac9f7fc38ac1f3b7289ef5d9782f\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\abf655c8d360fda3a9a902bb03dc4a59f38bcf58\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\6a34734dbdba162893decd2f6f3f352e4e598c3f\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:transition:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\0f5da5f3a113eee3cdb19da5dc9e541154bc9c38\output\AndroidManifest.xml:26:5-20
+MERGED from [com.google.android.gms:play-services-plus:11.0.4] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\6cd3f645c63cd7c3b91f28dca2f171cd1d2276b2\output\AndroidManifest.xml:18:5-19
+MERGED from [com.google.android.gms:play-services-base:11.0.4] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\6980a7b1ee3dcc2d1eeb68be52ea6b862cb65063\output\AndroidManifest.xml:18:5-20:19
+MERGED from [com.google.android.gms:play-services-tasks:11.0.4] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\cbb0594bc714bbd3a137bc757390bcefc991ed01\output\AndroidManifest.xml:4:5-19
+MERGED from [com.google.android.gms:play-services-basement:11.0.4] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\7f6ac25e507461b7aa57656435dc714b1492e6da\output\AndroidManifest.xml:19:5-21:19
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\cecc88b616693725dbd7fa1e9e05fec7ee75b5a4\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\6b67dc77ff1437cfc80c9a6546a01ebfa38de374\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\8d6048057b06ca69c91eabe331826d6886a7e051\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\f8c79f9c8fb47cb00f9155fba625e104a332a3ec\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\0d7a3f423d87fc2467879892f6fd8da8a2ccf546\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\6e1696e8424ea4bf09a4a634105f1e644e712364\output\AndroidManifest.xml:29:5-20
+	android:label
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:11:9-36
+		INJECTED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml
+	android:supportsRtl
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:13:9-35
+	android:roundIcon
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:12:9-39
+	android:allowBackup
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:9:9-35
+	android:icon
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:10:9-34
+	android:theme
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:14:9-40
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:8:9-38
+meta-data#app_name
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:15:9-17:43
+	android:value
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:17:13-40
+		INJECTED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:16:13-36
+activity#com.smyhvae.myapplication.ValidateActivity
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:19:9-26:20
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:19:19-51
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER+com.smyhvae.myapplication.ValidateActivity
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:20:13-25:29
+action#android.intent.action.MAIN
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:21:17-69
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:21:25-66
+action#com.smyhvae.myapplication.ValidateActivity
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:22:17-85
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:22:25-82
+category#android.intent.category.LAUNCHER
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:24:17-77
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:24:27-74
+activity#com.smyhvae.myapplication.RegeditActivity
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:27:9-53
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:27:19-50
+activity#com.smyhvae.myapplication.ContentActivity
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:28:9-53
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:28:19-50
+activity#com.smyhvae.myapplication.TabActivity
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:29:9-49
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:29:19-46
+activity#com.smyhvae.myapplication.BottomActivity
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:30:9-32:61
+	android:label
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:32:13-58
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:31:13-43
+service#com.smyhvae.myapplication.LoginIntentService
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:34:9-36:40
+	android:exported
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:36:13-37
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:35:13-47
+service#com.smyhvae.service.ValidateService
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:37:9-71
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:37:18-68
+activity#com.smyhvae.myapplication.LoginActivity
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:39:9-41:71
+	android:windowSoftInputMode
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:41:13-68
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:40:13-42
+activity#com.smyhvae.myapplication.StyleActivity
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:42:9-44:55
+	android:windowSoftInputMode
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:44:13-52
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:43:13-42
+activity#com.smyhvae.myapplication.MainActivity
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:45:9-48:85
+	android:windowSoftInputMode
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:48:13-82
+	android:configChanges
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:47:13-63
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:46:13-41
+service#com.smyhvae.service.RegeditService
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:50:9-52:40
+	android:exported
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:52:13-37
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:51:13-62
+service#com.smyhvae.service.HandlerService
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:53:9-55:40
+	android:exported
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:55:13-37
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:54:13-62
+activity#com.smyhvae.myapplication.AboutUsActivity
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:57:9-53
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:57:19-50
+activity#com.smyhvae.myapplication.HelpActivity
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:58:9-50
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:58:19-47
+activity#com.smyhvae.myapplication.PersonalInfoActivity
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:59:9-58
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:59:19-55
+activity#com.smyhvae.myapplication.ColorSizeActivity
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:60:9-55
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:60:19-52
+activity#com.smyhvae.myapplication.PaymentActivity
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:61:9-64:75
+	android:windowSoftInputMode
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:64:13-72
+	android:configChanges
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:63:13-63
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:62:13-44
+activity#com.smyhvae.myapplication.SelectSalesBillActivity
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:65:9-61
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:65:19-58
+activity#com.smyhvae.myapplication.AddStyleActivity
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:66:9-68:73
+	android:windowSoftInputMode
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:68:13-70
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:67:13-45
+activity#com.smyhvae.myapplication.AddClientActivity
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:69:9-55
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:69:19-52
+activity#com.smyhvae.myapplication.SelectColorActivity
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:70:9-57
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:70:19-54
+activity#com.smyhvae.myapplication.SelectSizeActivity
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:71:9-56
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:71:19-53
+activity#com.smyhvae.myapplication.PrintActivity
+ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:72:9-60
+	android:name
+		ADDED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml:72:19-48
+uses-sdk
+INJECTED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\1699383e453bcaf6029f0e8700f01c9ac64c052f\output\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:design:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\a37d6615f36a6f46a54ffb816d511ac37a7eff4e\output\AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:appcompat-v7:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\f0235b16e36bac9f7fc38ac1f3b7289ef5d9782f\output\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\abf655c8d360fda3a9a902bb03dc4a59f38bcf58\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\6a34734dbdba162893decd2f6f3f352e4e598c3f\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\5be47d74f95c1b63efce6f043bb34c89238057bf\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\0f5da5f3a113eee3cdb19da5dc9e541154bc9c38\output\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-plus:11.0.4] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\6cd3f645c63cd7c3b91f28dca2f171cd1d2276b2\output\AndroidManifest.xml:17:5-43
+MERGED from [com.google.android.gms:play-services-base:11.0.4] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\6980a7b1ee3dcc2d1eeb68be52ea6b862cb65063\output\AndroidManifest.xml:17:5-43
+MERGED from [com.google.android.gms:play-services-tasks:11.0.4] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\cbb0594bc714bbd3a137bc757390bcefc991ed01\output\AndroidManifest.xml:3:5-43
+MERGED from [com.google.android.gms:play-services-basement:11.0.4] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\7f6ac25e507461b7aa57656435dc714b1492e6da\output\AndroidManifest.xml:17:5-43
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\cecc88b616693725dbd7fa1e9e05fec7ee75b5a4\output\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\6b67dc77ff1437cfc80c9a6546a01ebfa38de374\output\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\8d6048057b06ca69c91eabe331826d6886a7e051\output\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\f8c79f9c8fb47cb00f9155fba625e104a332a3ec\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\0d7a3f423d87fc2467879892f6fd8da8a2ccf546\output\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\6e1696e8424ea4bf09a4a634105f1e644e712364\output\AndroidManifest.xml:21:5-23:58
+	tools:overrideLibrary
+		ADDED from [com.android.support:design:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\a37d6615f36a6f46a54ffb816d511ac37a7eff4e\output\AndroidManifest.xml:23:9-59
+	android:targetSdkVersion
+		INJECTED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml
+		INJECTED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml
+		INJECTED from D:\android\workspaces\ad\app\src\main\AndroidManifest.xml
+meta-data#android.support.VERSION
+ADDED from [com.android.support:design:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\a37d6615f36a6f46a54ffb816d511ac37a7eff4e\output\AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:appcompat-v7:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\f0235b16e36bac9f7fc38ac1f3b7289ef5d9782f\output\AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\abf655c8d360fda3a9a902bb03dc4a59f38bcf58\output\AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\6a34734dbdba162893decd2f6f3f352e4e598c3f\output\AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:recyclerview-v7:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\5be47d74f95c1b63efce6f043bb34c89238057bf\output\AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:transition:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\0f5da5f3a113eee3cdb19da5dc9e541154bc9c38\output\AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\cecc88b616693725dbd7fa1e9e05fec7ee75b5a4\output\AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\6b67dc77ff1437cfc80c9a6546a01ebfa38de374\output\AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\8d6048057b06ca69c91eabe331826d6886a7e051\output\AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\f8c79f9c8fb47cb00f9155fba625e104a332a3ec\output\AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\0d7a3f423d87fc2467879892f6fd8da8a2ccf546\output\AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\6e1696e8424ea4bf09a4a634105f1e644e712364\output\AndroidManifest.xml:25:5-27:41
+	android:value
+		ADDED from [com.android.support:design:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\a37d6615f36a6f46a54ffb816d511ac37a7eff4e\output\AndroidManifest.xml:27:9-38
+	android:name
+		ADDED from [com.android.support:design:26.0.0-alpha1] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\a37d6615f36a6f46a54ffb816d511ac37a7eff4e\output\AndroidManifest.xml:26:9-47
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:11.0.4] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\6980a7b1ee3dcc2d1eeb68be52ea6b862cb65063\output\AndroidManifest.xml:19:9-172
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:11.0.4] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\6980a7b1ee3dcc2d1eeb68be52ea6b862cb65063\output\AndroidManifest.xml:19:146-170
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:11.0.4] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\6980a7b1ee3dcc2d1eeb68be52ea6b862cb65063\output\AndroidManifest.xml:19:86-145
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:11.0.4] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\6980a7b1ee3dcc2d1eeb68be52ea6b862cb65063\output\AndroidManifest.xml:19:19-85
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:11.0.4] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\7f6ac25e507461b7aa57656435dc714b1492e6da\output\AndroidManifest.xml:20:9-121
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:11.0.4] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\7f6ac25e507461b7aa57656435dc714b1492e6da\output\AndroidManifest.xml:20:66-119
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:11.0.4] C:\Users\Administrator.WIN-BOJ5VT4KFTF\.android\build-cache\7f6ac25e507461b7aa57656435dc714b1492e6da\output\AndroidManifest.xml:20:20-65

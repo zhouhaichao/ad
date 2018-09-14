@@ -1,0 +1,29 @@
+package com.smyhvae.util;
+
+import com.smyhvae.model.User;
+
+import org.json.JSONObject;
+
+/**
+ * Created by Administrator on 2017/10/9.
+ */
+
+public class LoginProtocol extends BaseProtocol {
+    private final static String URL = "http://localhost:8080/test/login";
+
+    public boolean checkLogin(User usr){
+        try{
+            pack(URL);
+            parse();
+            JSONObject obj=this.getJSON();
+            if(obj.getString("result").equals("failed")){
+                return false;
+            }else{
+                return true;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+}

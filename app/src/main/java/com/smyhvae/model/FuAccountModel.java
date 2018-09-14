@@ -1,8 +1,5 @@
 package com.smyhvae.model;
 
-
-import android.graphics.Bitmap;
-
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;

@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "D:\\android\\workspaces\\ad\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\bg_room_blue_middle.png",
+        "source": "D:\\android\\workspaces\\ad\\app\\src\\main\\res\\mipmap-xxhdpi\\bg_room_blue_middle.png"
+    },
+    {
+        "merged": "D:\\android\\workspaces\\ad\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\bg_room_red.9.png",
+        "source": "D:\\android\\workspaces\\ad\\app\\src\\main\\res\\mipmap-xxhdpi\\bg_room_red.9.png"
+    },
+    {
+        "merged": "D:\\android\\workspaces\\ad\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\bg_room_blue.9.png",
+        "source": "D:\\android\\workspaces\\ad\\app\\src\\main\\res\\mipmap-xxhdpi\\bg_room_blue.9.png"
+    },
+    {
+        "merged": "D:\\android\\workspaces\\ad\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\bg_room_red_middle.png",
+        "source": "D:\\android\\workspaces\\ad\\app\\src\\main\\res\\mipmap-xxhdpi\\bg_room_red_middle.png"
+    },
+    {
+        "merged": "D:\\android\\workspaces\\ad\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_launcher.png",
+        "source": "D:\\android\\workspaces\\ad\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\android\\workspaces\\ad\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi\\ic_launcher_round.png",
+        "source": "D:\\android\\workspaces\\ad\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
+    }
+]

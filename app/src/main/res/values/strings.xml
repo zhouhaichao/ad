@@ -2,7 +2,7 @@
     <string name="app_name">启豹测试版</string>
     <string name="account">账"    "套</string>
     <string name="loginName">用户名</string>
-    <string name="inputName"></string>
+    <string name="inputName">""</string>
     <string name="password">密"    "码</string>
     <string name="inputPassword"></string>
     <string name="login">登录</string>
@@ -20,6 +20,40 @@
     <string name="xlistview_footer_hint_normal">查看更多</string>
     <string name="xlistview_footer_hint_ready">松开载入更多</string>
 
+    <string name="scaning">扫描</string>
+
+    <string name="disconnect">断开连接</string>
+    <string name="cut">未连接</string>
+    <string name="cutting">断开连接中...</string>
+    <string name="str_disconn">断开</string>
+    <string name="connect">连接</string>
+    <string name="connected">已连接</string>
+    <string name="connecting">连接中...</string>
+    <string name="port">接口:未设定 </string>
+    <string name="init_port_info">地址:不详</string>
+    <string name="str_enter_print_counts">请输入打印次数：</string>
+    <string name="str_choice_printer_command">请选择正确的打印机指令</string>
+    <string name="str_printer_conn_normal">打印机连接正常</string>
+    <string name="str_printer_out_of_paper">打印机缺纸</string>
+    <string name="str_printer_open_cover">打印机开盖</string>
+    <string name="str_printer_error">打印机出错</string>
+    <string name="str_state">状态：</string>
+    <string name="str_interface_undefine">接口：未设定</string>
+    <string name="str_select_printer_id">选中id为{0}的打印机</string>
+    <string name ="bluetooth_is_not_enabled">蓝牙没有开启</string>
+    <string name="select_bluetooth_device">选择蓝牙设备</string>
+    <string name="none_bluetooth_device_found">没有找到蓝牙设备</string>
+    <string name="none_paired">未配对</string>
+    <string name="title_paired_devices">已配对</string>
+    <string name="title_other_devices">New</string>
+    <string name="scan">扫描</string>
+
+    <string name="str_conn_state_disconnect">连接状态：未连接</string>
+    <string name="str_conn_state_connecting">连接状态：连接中</string>
+    <string name="str_connecting">连接中</string>
+    <string name="str_conn_state_connected">连接状态：已连接</string>
+
+    <string name="str_cann_printer">请先连接打印机</string>
 
     <string name="wordAndNum">qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM1234567890</string>
 </resources>

@@ -1,0 +1,909 @@
+package com.smyhvae.myapplication;
+
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.text.format.DateFormat;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.smyhvae.model.FuBaseModel;
+import com.smyhvae.model.FuColorGroupModel;
+import com.smyhvae.model.FuColorModel;
+import com.smyhvae.model.FuSizeGroupModel;
+import com.smyhvae.model.FuSizeModel;
+import com.smyhvae.model.FuStyleClassModel;
+import com.smyhvae.model.FuStyleColorModel;
+import com.smyhvae.model.FuStyleModel;
+import com.smyhvae.model.FuStylePriceTypeModel;
+import com.smyhvae.model.FuStyleSizeModel;
+import com.smyhvae.service.AcService;
+import com.smyhvae.service.BaseService;
+import com.smyhvae.service.StyleService;
+import com.smyhvae.util.BigDecimalUtil;
+import com.smyhvae.util.DataUtil;
+import com.smyhvae.util.DialogUtil;
+import com.smyhvae.util.Logcat;
+import com.smyhvae.view.CommomDialog;
+import com.smyhvae.view.MyAdapter;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+public class StyleActivity extends Activity implements View.OnClickListener{
+
+    private MyApplication application;
+    private String accessKey;
+    private int accountid;
+    private int loginstaffid;
+    private int logininvid;
+    private String webServerUrl;
+    private String result;
+    int w_screen=0;
+    int h_screen=0;
+
+    private Integer ACTIVITY_STATUS=0;
+
+    AcService acService = new AcService();
+
+    private TextView back;
+    private TextView addstyleinfo;
+    private TextView cancel;
+    private TextView edit;
+    private TextView add;
+
+    private RelativeLayout rl_styleinfo;
+    private LinearLayout rl_left;
+    private LinearLayout rl_right;
+    private ImageView imageView;
+    private ScrollView scv;
+    private LinearLayout lay_price;
+    private EditText stylecode;
+    private EditText stylename;
+    private EditText colorString;
+    private TextView addColor;
+    private EditText sizeString;
+    private TextView addSize;
+    private EditText supplier;
+    private TextView addSupplier;
+    private EditText price;
+    private EditText classString;
+    private TextView addClass;
+    private EditText brand;
+    private TextView addbrand;
+    private EditText season;
+    private EditText remark;
+    private EditText suppliercode;
+    private EditText standbarcode;
+    private TextView addStandbarcode;
+    private EditText marketdate;
+
+    private LinearLayout codeinfo;
+    private LinearLayout nameinfo;
+    private LinearLayout colorinfo;
+    private LinearLayout sizeinfo;
+    private LinearLayout supplierinfo;
+    private LinearLayout priceinfo;
+    private LinearLayout classinfo;
+    private LinearLayout brandinfo;
+    private LinearLayout seasoninfo;
+    private LinearLayout remarkinfo;
+    private LinearLayout suppliercodeinfo;
+    private LinearLayout standbarcodeinfo;
+    private LinearLayout marketdateinfo;
+
+    private MyAdapter supplierAdapter;
+    private ListView supplierListView;
+    private MyAdapter brandAdapter;
+    private ListView brandListView;
+    private MyAdapter classAdaper;
+    private ListView classListView;
+    private MyAdapter seasonAdapter;
+    private ListView seasonListView;
+
+    private Integer clientid;
+    private Integer brandid;
+    private Integer classid;
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private List<FuBaseModel> priceTypeList = new ArrayList<>();
+    private MyAdapter adapter;
+    private List<FuBaseModel> testArray = new ArrayList<>();
+    private List<FuBaseModel> classList;
+    private List<FuBaseModel> brandList;
+    private List<FuColorModel> colorModelList;
+    private List<FuSizeModel> sizeModelList;
+    private List<FuColorModel> colors = new ArrayList<>();
+    private List<FuSizeModel> sizes = new ArrayList<>();
+    private List<FuStylePriceTypeModel> pricetypes = new ArrayList<>();
+    private List<FuStyleClassModel> styleClasses = new ArrayList<>();
+    private List<FuColorGroupModel> fuColorGroupList = new ArrayList<>();
+    private List<FuSizeGroupModel> fuSizeGroupList = new ArrayList<>();
+    DataUtil dataUtil = new DataUtil();
+    private int id;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_style);
+        application = (MyApplication) getApplication().getApplicationContext();
+        accessKey = application.getAccessKey();
+        accountid = application.getFuStaffModel().getAccountid();
+        loginstaffid = application.getFuStaffModel().getId();
+        logininvid = application.getFuStaffModel().getFuInventoryList().get(0).getId();
+        webServerUrl = application.getWebServerUrl();
+        Log.d("sfn", application.getFuAccountModel().getColorsizemode()+"");
+        DisplayMetrics dm =getResources().getDisplayMetrics();
+        w_screen = dm.widthPixels;
+        h_screen = dm.heightPixels;
+        Intent i = getIntent();
+        id = i.getExtras().getInt("id");
+        Log.d("sfn", id+"");
+        initView();
+        new Thread() {
+            public void run() {
+                try {
+                    for (int i=1; i<7; i++){
+                        BaseService baseService = new BaseService();
+                        if (i==1){
+                            StyleService styleService = new StyleService();
+                            result = styleService.doSelectStyle(webServerUrl, loginstaffid, logininvid, accessKey, accountid, id);
+                            Logcat.show(result);
+                        }else if(i==2){
+                            result = baseService.doList(webServerUrl, loginstaffid, logininvid, accessKey, accountid, "color", "fuColorList");
+                        }else if(i==3){
+                            result = baseService.doList(webServerUrl, loginstaffid, logininvid, accessKey, accountid, "colorGroup", "fuColorGroupList");
+                        }else if(i==4){
+                            result = baseService.doList(webServerUrl, loginstaffid, logininvid, accessKey, accountid, "size", "fuSizeList");
+                        }else if(i==5){
+                            result = baseService.doList(webServerUrl, loginstaffid, logininvid, accessKey, accountid, "sizeGroup", "fuSizeGroupList");
+                        }else if(i==6){
+                            result = baseService.doList(webServerUrl, loginstaffid, logininvid, accessKey, accountid, "priceType", "fuPriceTypeList");
+                            Logcat.show(result);
+                        }
+                        Message msg = Message.obtain();
+                        msg.what=i;
+                        msg.obj = result;
+                        handler.sendMessage(msg);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+
+        setACTIVITY_STATUS();
+    }
+
+    public void setACTIVITY_STATUS(){
+        if (ACTIVITY_STATUS.equals(0)){
+            setStatus(false);
+            for (int j=0; j<lay_price.getChildCount(); j++) {
+                View v = lay_price.getChildAt(j);
+                if (v instanceof LinearLayout) {
+                    LinearLayout layout = (LinearLayout) v;
+                    for (int k=0; k<layout.getChildCount(); k++){
+                        View view = layout.getChildAt(k);
+                        if (view instanceof EditText){
+                            view.setFocusable(false);
+                            view.setFocusableInTouchMode(false);
+                        }
+                    }
+
+                }
+            }
+        }else if(ACTIVITY_STATUS.equals(1)){
+            setStatus(true);
+            requestFocus();
+            classString.setFocusable(false);
+            classString.setFocusableInTouchMode(false);
+            season.setFocusable(false);
+            season.setFocusableInTouchMode(false);
+            if (application.getFuAccountModel().getColorsizemode().intValue()==1){
+                colorString.setFocusable(false);
+                sizeString.setFocusable(false);
+            }else if(application.getFuAccountModel().getColorsizemode().intValue()==0){
+                colorString.setFocusable(false);
+                sizeString.setFocusable(false);
+                colorString.setFocusableInTouchMode(false);
+                sizeString.setFocusableInTouchMode(false);
+                colorString.clearFocus();
+                sizeString.clearFocus();
+                colorString.setOnClickListener(this);
+                sizeString.setOnClickListener(this);
+            }
+            for (int j=0; j<lay_price.getChildCount(); j++) {
+                View v = lay_price.getChildAt(j);
+                if (v instanceof LinearLayout) {
+                    LinearLayout layout = (LinearLayout) v;
+                    for (int k=0; k<layout.getChildCount(); k++){
+                        View view = layout.getChildAt(k);
+                        if (view instanceof EditText){
+                            view.setFocusable(true);
+                            view.setFocusableInTouchMode(true);
+                        }
+                    }
+
+                }
+            }
+
+            setData();
+        }
+    }
+
+    private void initView() {
+        back = this.findViewById(R.id.back);
+        addstyleinfo = this.findViewById(R.id.addstyleinfo);
+        cancel = this.findViewById(R.id.cancel);
+        edit = this.findViewById(R.id.edit);
+        add= this.findViewById(R.id.add);
+        rl_styleinfo = this.findViewById(R.id.rl_styleinfo);
+        rl_left = this.findViewById(R.id.rl_left);
+        rl_right = this.findViewById(R.id.rl_right);
+        imageView = this.findViewById(R.id.imageView);
+        scv = this.findViewById(R.id.scv);
+        lay_price = this.findViewById(R.id.lay_price);
+        stylecode = this.findViewById(R.id.stylecode);
+        stylename = this.findViewById(R.id.stylename);
+        colorString = this.findViewById(R.id.colorString);
+        addColor = this.findViewById(R.id.addColor);
+        sizeString = this.findViewById(R.id.sizeString);
+        addSize = this.findViewById(R.id.addSize);
+        supplier = this.findViewById(R.id.supplier);
+        addSupplier = this.findViewById(R.id.addSupplier);
+        price = this.findViewById(R.id.price);
+        classString = this.findViewById(R.id.classString);
+        addClass = this.findViewById(R.id.addClass);
+        brand = this.findViewById(R.id.brand);
+        addbrand = this.findViewById(R.id.addbrand);
+        season = this.findViewById(R.id.season);
+        remark = this.findViewById(R.id.remark);
+        suppliercode = this.findViewById(R.id.suppliercode);
+        standbarcode = this.findViewById(R.id.standbarcode);
+        addStandbarcode = this.findViewById(R.id.addStandbarcode);
+        marketdate = this.findViewById(R.id.marketdate);
+
+        codeinfo = this.findViewById(R.id.codeinfo);
+        nameinfo = this.findViewById(R.id.nameinfo);
+        colorinfo = this.findViewById(R.id.colorinfo);
+        sizeinfo = this.findViewById(R.id.sizeinfo);
+
+        supplierinfo = this.findViewById(R.id.supplierinfo);
+        priceinfo = this.findViewById(R.id.priceinfo);
+        classinfo = this.findViewById(R.id.classinfo);
+        brandinfo = this.findViewById(R.id.brandinfo);
+        seasoninfo = this.findViewById(R.id.seasoninfo);
+        remarkinfo = this.findViewById(R.id.remarkinfo);
+        suppliercodeinfo = this.findViewById(R.id.suppliercodeinfo);
+        standbarcodeinfo = this.findViewById(R.id.standbarcodeinfo);
+        marketdateinfo = this.findViewById(R.id.marketdateinfo);
+
+        int widths = w_screen/3;
+        back.setWidth(widths);
+        addstyleinfo.setWidth(widths);
+        cancel.setWidth(widths/3);
+        edit.setWidth(widths/2);
+        add.setWidth(widths/3);
+
+        widths = w_screen/2;
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(widths, ViewGroup.LayoutParams.WRAP_CONTENT);
+        rl_left.setLayoutParams(params);
+        rl_right.setLayoutParams(params);
+        params = new LinearLayout.LayoutParams(w_screen/3+50, 400);
+        params.setMargins(20, 0 , 0 , 0);
+        scv.setLayoutParams(params);
+
+        params = new LinearLayout.LayoutParams(widths+100, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.setMargins(60, 10, 20, 0);
+        codeinfo.setLayoutParams(params);
+        nameinfo.setLayoutParams(params);
+        colorinfo.setLayoutParams(params);
+        sizeinfo.setLayoutParams(params);
+        supplierinfo.setLayoutParams(params);
+        priceinfo.setLayoutParams(params);
+        classinfo.setLayoutParams(params);
+        brandinfo.setLayoutParams(params);
+        seasoninfo.setLayoutParams(params);
+        remarkinfo.setLayoutParams(params);
+
+        widths = widths-200;
+        stylecode.setWidth(widths);
+        stylename.setWidth(widths);
+        colorString.setWidth(widths);
+        sizeString.setWidth(widths);
+        supplier.setWidth(widths);
+        price.setWidth(widths);
+
+        params = new LinearLayout.LayoutParams(widths-10, 100);
+        params.setMargins(10, 0, 5, 0);
+        classString.setLayoutParams(params);
+        classString.setPadding(5, 5, 5, 5);
+        season.setLayoutParams(params);
+
+        brand.setWidth(widths);
+        remark.setWidth(widths);
+        suppliercode.setWidth(widths);
+        standbarcode.setWidth(widths);
+        marketdate.setWidth(widths);
+        marketdate.setFocusable(false);
+
+        back.setOnClickListener(this);
+        cancel.setOnClickListener(this);
+        edit.setOnClickListener(this);
+        add.setOnClickListener(this);
+
+    }
+
+    private Handler handler = new Handler() {
+
+        public void handleMessage(Message msg) {
+            DataUtil dataUtil = new DataUtil();
+            if (msg.what == 1) {
+                FuBaseModel baseModel = dataUtil.message(msg.obj.toString());
+                if(baseModel.getResultCode().intValue() ==1){
+                    FuStyleModel styleModel = dataUtil.getStyleData(msg.obj.toString());
+                    stylecode.setText(styleModel.getCode());
+                    stylename.setText(styleModel.getName());
+                    String colorStrings = "";
+                    for (FuStyleColorModel fuStyleColorModel: styleModel.getResultStyleColorModelList()){
+                        colorStrings = fuStyleColorModel.getColorString()+","+colorStrings;
+                        FuColorModel colorModel = new FuColorModel();
+                        colorModel.setColorid(fuStyleColorModel.getColorid());
+                        colors.add(colorModel);
+                    }
+                    if (colorStrings.length()>0){
+                        colorStrings = colorStrings.substring(0, colorStrings.length()-1);
+                    }
+                    colorString.setText(colorStrings);
+                    String sizeStrings = "";
+                    for (FuStyleSizeModel fuStyleSizeModel: styleModel.getResultStyleSizeModelList()){
+                        sizeStrings = fuStyleSizeModel.getSizeString()+","+sizeStrings;
+                        FuSizeModel sizeModel = new FuSizeModel();
+                        sizeModel.setSizeid(fuStyleSizeModel.getSizeid());
+                        sizes.add(sizeModel);
+                    }
+                    if (sizeStrings.length()>0){
+                        sizeStrings = sizeStrings.substring(0, sizeStrings.length()-1);
+                    }
+                    sizeString.setText(sizeStrings);
+                    supplier.setText(styleModel.getClientString());
+                    clientid = styleModel.getClientid();
+                    price.setText(String.valueOf(styleModel.getPrice().intValue()));
+                    if (styleModel.getFuStyleClassModelList().size()>0){
+                        classString.setText(styleModel.getFuStyleClassModelList().get(0).getClassString());
+                        classid = styleModel.getFuStyleClassModelList().get(0).getClassid();
+                    }
+                    brand.setText(styleModel.getBrandString());
+                    brandid = styleModel.getBrandid();
+                    season.setText(styleModel.getSeason());
+                    remark.setText(styleModel.getRemark());
+                    suppliercode.setText(styleModel.getSuppliercode());
+                    standbarcode.setText(styleModel.getStandardbarcode());
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    marketdate.setText(sdf.format(styleModel.getMarketdate()));
+
+                    for (FuStylePriceTypeModel stylePriceTypeModel : styleModel.getFuStylePriceTypeModelList()){
+                        final FuStylePriceTypeModel fuStylePriceTypeModel = new FuStylePriceTypeModel();
+                        fuStylePriceTypeModel.setPricetypeString(stylePriceTypeModel.getPricetypeString());
+                        fuStylePriceTypeModel.setPricetypeid(stylePriceTypeModel.getPricetypeid());
+                        fuStylePriceTypeModel.setRatio(stylePriceTypeModel.getRatio());
+                        LinearLayout layout = new LinearLayout(getApplicationContext());
+                        layout.setOrientation(LinearLayout.HORIZONTAL);
+                        TextView textView = new TextView(getApplicationContext());
+                        textView.setText(stylePriceTypeModel.getPricetypeString());
+                        TextView tv = new TextView(getApplicationContext());
+                        tv.setText("￥");
+                        tv.setTextColor(Color.RED);
+                        tv.setTextSize(20);
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        params.setMargins(15, 0, 0, 0);
+                        tv.setLayoutParams(params);
+                        final EditText editText = new EditText(getApplicationContext());
+                        editText.setFocusable(false);
+                        editText.setText(new BigDecimalUtil().getStringUtil(stylePriceTypeModel.getPrice().toString()));
+                        editText.setSingleLine(true);
+                        editText.setEllipsize(TextUtils.TruncateAt.END);
+                        editText.setTextColor(Color.RED);
+                        editText.setPadding(20,50,0,0);
+                        editText.setBackground(null);
+                        editText.setWidth(w_screen/4);
+                        editText.setInputType(InputType.TYPE_CLASS_PHONE);
+                        fuStylePriceTypeModel.setPrice(stylePriceTypeModel.getPrice());
+                        editText.addTextChangedListener(new TextWatcher() {
+                            @Override
+                            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                            }
+
+                            @Override
+                            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                                if (editText.getText().toString().trim() != null && !("").equals(editText.getText().toString().trim())){
+                                    fuStylePriceTypeModel.setPrice(new BigDecimal(editText.getText().toString()));
+                                }else {
+                                    fuStylePriceTypeModel.setPrice(new BigDecimal(0));
+                                }
+                            }
+
+                            @Override
+                            public void afterTextChanged(Editable editable) {
+                            }
+                        });
+                        layout.addView(textView);
+                        layout.addView(tv);
+                        layout.addView(editText);
+                        TextView line = new TextView(getApplicationContext());
+                        line.setHeight(2);
+                        line.setWidth(w_screen/3-50);
+                        line.setBackgroundColor(Color.DKGRAY);
+                        line.setPadding(10, 10, 10, 5);
+                        lay_price.addView(layout);
+                        lay_price.addView(line);
+                        pricetypes.add(fuStylePriceTypeModel);
+                    }
+
+                }else if(baseModel.getResultCode().intValue() ==0){
+                    DialogUtil.showDialog(StyleActivity.this, baseModel.getMessage(), false);
+                }
+            }else if(msg.what==2){
+                FuBaseModel baseModel = dataUtil.message(msg.obj.toString());
+                if(baseModel.getResultCode().intValue() ==1){
+                    colorModelList = dataUtil.getColorList(msg.obj.toString());
+                }else if(baseModel.getResultCode().intValue() ==0){
+                    DialogUtil.showDialog(getApplicationContext(), baseModel.getMessage(), false);
+                }
+            }else if(msg.what==3){
+                FuBaseModel baseModel = dataUtil.message(msg.obj.toString());
+                if(baseModel.getResultCode().intValue() ==1){
+                    fuColorGroupList = dataUtil.getColorGroupList(msg.obj.toString());
+                }else if(baseModel.getResultCode().intValue() ==0){
+                    DialogUtil.showDialog(getApplicationContext(), baseModel.getMessage(), false);
+                }
+            }else if(msg.what==4){
+                FuBaseModel baseModel = dataUtil.message(msg.obj.toString());
+                if(baseModel.getResultCode().intValue() ==1){
+                    sizeModelList = dataUtil.getSizeList(msg.obj.toString());
+                }else if(baseModel.getResultCode().intValue() ==0){
+                    DialogUtil.showDialog(getApplicationContext(), baseModel.getMessage(), false);
+                }
+            }else if(msg.what==5){
+                FuBaseModel baseModel = dataUtil.message(msg.obj.toString());
+                if(baseModel.getResultCode().intValue() ==1){
+                    fuSizeGroupList = dataUtil.getSizeGroupList(msg.obj.toString());
+                }else if(baseModel.getResultCode().intValue() ==0){
+                    DialogUtil.showDialog(getApplicationContext(), baseModel.getMessage(), false);
+                }
+            }else if(msg.what==6){
+                FuBaseModel baseModel = dataUtil.message(msg.obj.toString());
+                if(baseModel.getResultCode().intValue() ==1){
+                    priceTypeList = dataUtil.getList(msg.obj.toString());
+                    Log.d("sfn", priceTypeList.size()+"");
+                }else if(baseModel.getResultCode().intValue() ==0){
+                    DialogUtil.showDialog(getApplicationContext(), baseModel.getMessage(), false);
+                }
+            }
+        }
+    };
+
+    public void setStatus(Boolean flag){
+        stylecode.setFocusable(flag);
+        stylecode.setFocusableInTouchMode(flag);
+        stylename.setFocusable(flag);
+        stylename.setFocusableInTouchMode(flag);
+        colorString.setFocusable(flag);
+        colorString.setFocusableInTouchMode(flag);
+        sizeString.setFocusable(flag);
+        sizeString.setFocusableInTouchMode(flag);
+        supplier.setFocusable(flag);
+        supplier.setFocusableInTouchMode(flag);
+        price.setFocusable(flag);
+        price.setFocusableInTouchMode(flag);
+        classString.setFocusable(flag);
+        classString.setFocusableInTouchMode(flag);
+        brand.setFocusable(flag);
+        brand.setFocusableInTouchMode(flag);
+        season.setFocusable(flag);
+        season.setFocusableInTouchMode(flag);
+        remark.setFocusable(flag);
+        remark.setFocusableInTouchMode(flag);
+        suppliercode.setFocusable(flag);
+        suppliercode.setFocusableInTouchMode(flag);
+        standbarcode.setFocusable(flag);
+        standbarcode.setFocusableInTouchMode(flag);
+    }
+
+    public void requestFocus(){
+
+        stylename.requestFocus();
+        colorString.requestFocus();
+        sizeString.requestFocus();
+        supplier.requestFocus();
+        price.requestFocus();
+        brand.requestFocus();
+        season.requestFocus();
+        remark.requestFocus();
+        suppliercode.requestFocus();
+        standbarcode.requestFocus();
+        stylecode.requestFocus();
+    }
+
+    public void setData(){
+        supplierListView = new ListView(this);
+        supplierListView.setVisibility(View.GONE);
+        supplierListView.setBackgroundColor(Color.parseColor("#FFC0CB"));
+//        supplierListView.setBackground(getResources().getDrawable(R.drawable.list_bg));
+        int widths = w_screen/2-200;
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(widths, 500);
+        params.setMargins(widths-100, h_screen/4, 0, 0);
+        supplierListView.setLayoutParams(params);
+        rl_styleinfo.addView(supplierListView);
+
+        brandListView = new ListView(this);
+        brandListView.setVisibility(View.GONE);
+        brandListView.setBackgroundColor(Color.parseColor("#FFC0CB"));
+        params = new LinearLayout.LayoutParams(widths, 500);
+        params.setMargins(widths-100, h_screen/3, 0, 0);
+        brandListView.setLayoutParams(params);
+        rl_styleinfo.addView(brandListView);
+
+        classListView = new ListView(this);
+        classListView.setVisibility(View.GONE);
+        classListView.setBackgroundColor(Color.parseColor("#FFC0CB"));
+        params = new LinearLayout.LayoutParams(widths, 500);
+        params.setMargins(widths, h_screen/4, 0, 0);
+        classListView.setLayoutParams(params);
+        rl_styleinfo.addView(classListView);
+
+        seasonListView = new ListView(this);
+        seasonListView.setVisibility(View.GONE);
+        seasonListView.setBackgroundColor(Color.parseColor("#FFC0CB"));
+        params = new LinearLayout.LayoutParams(widths, 500);
+        params.setMargins(w_screen/2+100, h_screen/4-50, 0, 0);
+        seasonListView.setLayoutParams(params);
+        rl_styleinfo.addView(seasonListView);
+
+
+
+        marketdate.setText(sdf.format(new Date()));
+        final Calendar c = Calendar.getInstance();
+        marketdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog dialog = new DatePickerDialog(StyleActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        c.set(year, monthOfYear, dayOfMonth);
+                        marketdate.setText(DateFormat.format("yyy-MM-dd", c));
+                    }
+                }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+                dialog.show();
+            }
+        });
+
+        //厂商AC
+        supplierAdapter = new MyAdapter(this, testArray);
+        supplierListView.setAdapter(supplierAdapter);// 设置Adapter，初始值为空
+
+        supplierListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {// listView点击事件
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                clientid = supplierAdapter.getItem(position).getId();
+                supplier.setText(supplierAdapter.getItem(position).getName());
+                supplierListView.setVisibility(View.GONE);
+            }
+        });
+
+        supplier.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                testArray = new ArrayList<>();// 每次输入的时候，重新初始化数据列表
+                if (!TextUtils.isEmpty(supplier.getText().toString())) {// 判断输入内容是否为空，为空则跳过
+                    String input = supplier.getText().toString().trim();
+                    testArray =acService.getAC(getApplicationContext(), webServerUrl, loginstaffid,
+                            logininvid, accessKey, accountid, "supplierListForAC", input, null);
+                }
+                supplierAdapter.refreshData(testArray);// Adapter刷新数据
+                supplierListView.setVisibility(View.VISIBLE);
+                if (TextUtils.isEmpty(supplier.getText().toString())){
+                    supplierListView.setVisibility(View.GONE);
+                }
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        //品牌AC
+        brandAdapter = new MyAdapter(this, testArray);
+        brandListView.setAdapter(brandAdapter);// 设置Adapter，初始值为空
+
+        brandListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {// listView点击事件
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                brandid = brandAdapter.getItem(position).getId();
+                brand.setText(brandAdapter.getItem(position).getName());
+                brandListView.setVisibility(View.GONE);
+            }
+        });
+
+        brand.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                testArray = new ArrayList<>();// 每次输入的时候，重新初始化数据列表
+                if (!TextUtils.isEmpty(brand.getText().toString())) {// 判断输入内容是否为空，为空则跳过
+                    String input = brand.getText().toString().trim();
+                    testArray =acService.getAC(getApplicationContext(), webServerUrl, loginstaffid,
+                            logininvid, accessKey, accountid, "brandListForAC", input, null);
+                }
+                brandAdapter.refreshData(testArray);// Adapter刷新数据
+                brandListView.setVisibility(View.VISIBLE);
+                if (TextUtils.isEmpty(brand.getText().toString())){
+                    brandListView.setVisibility(View.GONE);
+                }
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        classString.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BaseService baseService = new BaseService();
+                String result = baseService.doList(webServerUrl, loginstaffid, logininvid, accessKey, accountid, "class", "fuClassList");
+                Logcat.show(result);
+                FuBaseModel baseModel = dataUtil.message(result);
+
+                if(baseModel.getResultCode().intValue() ==1){
+                    classList = dataUtil.getList(result);
+                    classAdaper = new MyAdapter(getApplicationContext(), classList);
+                    classListView.setAdapter(classAdaper);
+                }else if(baseModel.getResultCode().intValue() ==0){
+                    DialogUtil.showDialog(getApplicationContext(), baseModel.getMessage(), false);
+                }
+                classListView.setVisibility(View.VISIBLE);
+            }
+        });
+
+        classListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {// listView点击事件
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                classid = classAdaper.getItem(position).getId();
+                classString.setText(classAdaper.getItem(position).getName());
+                classListView.setVisibility(View.GONE);
+            }
+        });
+
+        season.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                List<FuBaseModel> seasonList = new ArrayList<FuBaseModel>();
+                FuBaseModel fuBaseModel = new FuBaseModel();
+                fuBaseModel.setName("春季");
+                seasonList.add(fuBaseModel);
+                fuBaseModel = new FuBaseModel();
+                fuBaseModel.setName("夏季");
+                seasonList.add(fuBaseModel);
+                fuBaseModel = new FuBaseModel();
+                fuBaseModel.setName("秋季");
+                seasonList.add(fuBaseModel);
+                fuBaseModel = new FuBaseModel();
+                fuBaseModel.setName("冬季");
+                seasonList.add(fuBaseModel);
+                fuBaseModel = new FuBaseModel();
+                fuBaseModel.setName("春秋季");
+                seasonList.add(fuBaseModel);
+                fuBaseModel = new FuBaseModel();
+                fuBaseModel.setName("秋冬季");
+                seasonList.add(fuBaseModel);
+                seasonAdapter = new MyAdapter(getApplicationContext(), seasonList);
+                seasonListView.setAdapter(seasonAdapter);
+                seasonListView.setVisibility(View.VISIBLE);
+            }
+        });
+
+        seasonListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {// listView点击事件
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                season.setText(seasonAdapter.getItem(position).getName());
+                seasonListView.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    public static final int  REQUEST_CODE=1001;
+    public static final int CODE=1002;
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.back:
+                this.finish();
+                break;
+            case R.id.edit:
+                cancel.setVisibility(View.VISIBLE);
+                add.setVisibility(View.VISIBLE);
+                edit.setVisibility(View.GONE);
+                ACTIVITY_STATUS = 1;
+                setACTIVITY_STATUS();
+                break;
+            case R.id.cancel:
+                cancel.setVisibility(View.GONE);
+                add.setVisibility(View.GONE);
+                edit.setVisibility(View.VISIBLE);
+                ACTIVITY_STATUS = 0;
+                setACTIVITY_STATUS();
+                break;
+            case R.id.add:
+                if (doAdd()){
+                    new CommomDialog(this, R.style.dialog, "您确定保存？", new CommomDialog.OnCloseListener() {
+                        @Override
+                        public void onClick(Dialog dialog, boolean confirm) {
+                            if(confirm){
+                                String code = stylecode.getText().toString();
+                                String name = stylename.getText().toString();
+                                String seasons = season.getText().toString();
+                                String prices = price.getText().toString();
+                                String time = marketdate.getText().toString();
+                                String suppliercodes = suppliercode.getText().toString();
+                                String standardbarcode = standbarcode.getText().toString();
+                                String remarks = remark.getText().toString();
+
+                                if (TextUtils.isEmpty(supplier.getText().toString())){
+                                    clientid = null;
+                                }
+                                if (TextUtils.isEmpty(brand.getText().toString())) {
+                                    brand = null;
+                                }
+                                if (classid != null){
+                                    FuStyleClassModel styleClassModel = new FuStyleClassModel();
+                                    styleClassModel.setClassid(classid);
+                                    styleClasses.add(styleClassModel);
+                                }
+
+                                StyleService styleService = new StyleService();
+                                String result = styleService.doUpadteStyle(webServerUrl, loginstaffid, logininvid, accessKey, accountid, id, code, name, brandid,
+                                        seasons, clientid, time, prices, suppliercodes, standardbarcode, remarks, styleClasses, colors, sizes, pricetypes);
+                                Logcat.show(result);
+                                DataUtil dataUtil = new DataUtil();
+                                FuBaseModel baseModel = dataUtil.message(result);
+                                if(baseModel.getResultCode().intValue() ==1){
+                                    Toast.makeText(getApplicationContext(), baseModel.getMessage(), Toast.LENGTH_LONG).show();
+                                    StyleActivity.this.onDestroy();
+                                    Intent intent = new Intent(StyleActivity.this, MainActivity.class);
+                                    intent.putExtra("i", "2");
+                                    startActivity(intent);
+                                }else if(baseModel.getResultCode().intValue() ==0){
+                                    DialogUtil.showDialog(getApplicationContext(), baseModel.getMessage(), false);
+                                }
+                                dialog.dismiss();
+                            }
+                        }
+                    }).setTitle("提示").show();
+                }
+                break;
+            case R.id.colorString:
+                Intent intent=new Intent(StyleActivity.this, SelectColorActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("colors", (Serializable) colorModelList);
+                bundle.putSerializable("colorGroups", (Serializable) fuColorGroupList);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, REQUEST_CODE);
+                break;
+            case R.id.sizeString:
+                Intent intentForSize=new Intent(StyleActivity.this, SelectSizeActivity.class);
+                Bundle bundleForSize = new Bundle();
+                bundleForSize.putSerializable("sizes", (Serializable) sizeModelList);
+                bundleForSize.putSerializable("sizeGroups", (Serializable) fuSizeGroupList);
+                intentForSize.putExtras(bundleForSize);
+                startActivityForResult(intentForSize, REQUEST_CODE);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public boolean doAdd(){
+        boolean flag = true;
+        if (stylecode.getText().toString().trim().equals("")){
+            new  AlertDialog.Builder(this) .setTitle("警告！" ) .setMessage("请输入款号！" )
+                    .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            dialog.dismiss();
+                        }
+                    }) .show();
+            flag = false;
+            return flag;
+        }
+
+        if (colorString.getText().toString().trim().equals("")){
+            new  AlertDialog.Builder(this) .setTitle("警告！" ) .setMessage("请输入颜色！" )
+                    .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            dialog.dismiss();
+                        }
+                    }) .show();
+            flag = false;
+            return flag;
+        }
+
+        if (sizeString.getText().toString().trim().equals("")){
+            new  AlertDialog.Builder(this) .setTitle("警告！" ) .setMessage("请输入尺码！" )
+                    .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int i) {
+                            dialog.dismiss();
+                        }
+                    }) .show();
+            flag = false;
+        }
+
+        return flag;
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode==REQUEST_CODE && resultCode==RESULT_OK){
+            colors = (List<FuColorModel>) data.getSerializableExtra("colors");
+            String colorStrings="";
+            for (FuColorModel colorModel : colors){
+                Log.d("sfn", colorModel.getName());
+                colorStrings = colorModel.getName()+","+colorStrings;
+
+            }
+            if (colorStrings.length()>0){
+                colorStrings = colorStrings.substring(0, colorStrings.length()-1);
+            }
+            colorString.setText(colorStrings);
+        }else if(requestCode==REQUEST_CODE && resultCode==CODE){
+            sizes = (List<FuSizeModel>) data.getSerializableExtra("sizes");
+            String sizeStrings="";
+            for (FuSizeModel sizeModel : sizes){
+                Log.d("sfn", sizeModel.getName());
+                sizeStrings = sizeModel.getName()+","+sizeStrings;
+
+            }
+            if (sizeStrings.length()>0){
+                sizeStrings = sizeStrings.substring(0, sizeStrings.length()-1);
+            }
+            sizeString.setText(sizeStrings);
+        }
+    }
+}

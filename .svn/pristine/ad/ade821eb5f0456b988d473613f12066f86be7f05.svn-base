@@ -1,0 +1,95 @@
+/**
+ * 
+ */
+package com.smyhvae.model;
+
+public class FuSizeModel extends FuBaseModel {
+
+	/**
+	 * 尺码
+	 */
+	private Integer code;
+	private Integer groupid;
+	private Integer rank;
+	private Integer status;
+	private Integer amount;
+
+	private String groupString;
+	
+	private Integer isShow;
+
+	private Integer sizeid;
+	private Integer selectStatus;
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Integer getCode() {
+		return code;
+	}
+
+	public void setCode(Integer code) {
+		this.code = code;
+	}
+
+	public Integer getGroupid() {
+		return groupid;
+	}
+
+	public void setGroupid(Integer groupid) {
+		this.groupid = groupid;
+	}
+
+	public String getGroupString() {
+		return groupString;
+	}
+
+	public void setGroupString(String groupString) {
+		this.groupString = groupString;
+	}
+	
+	public Integer getRank() {
+		return rank;
+	}
+
+	public void setRank(Integer rank) {
+		this.rank = rank;
+	}
+
+	public Integer getIsShow() {
+		return isShow;
+	}
+
+	public void setIsShow(Integer isShow) {
+		this.isShow = isShow;
+	}
+
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
+
+	public Integer getSizeid() {
+		return sizeid;
+	}
+
+	public void setSizeid(Integer sizeid) {
+		this.sizeid = sizeid;
+	}
+
+	public Integer getSelectStatus() {
+		return selectStatus;
+	}
+
+	public void setSelectStatus(Integer selectStatus) {
+		this.selectStatus = selectStatus;
+	}
+}

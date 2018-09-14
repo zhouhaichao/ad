@@ -1,0 +1,56 @@
+package com.smyhvae.util;
+
+
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.net.SocketTimeoutException;
+
+public class ClientThread implements Runnable{
+    private Socket s;
+    public Handler revHandler;
+    OutputStream os = null;
+    String ip;
+
+    public  ClientThread(String ip){
+        super();
+        this.ip = ip;
+    }
+    @Override
+    public void run() {
+        try {
+            s = new Socket(ip, 8888);
+            os = s.getOutputStream();
+            // 为当前线程初始化Looper
+            Looper.prepare();
+            // 创建revHandler对象
+            revHandler = new Handler() {
+
+                @Override
+                public void handleMessage(Message msg) {
+                    if (msg.what == 0x345) {
+                        try {
+                            Logcat.show(msg.obj.toString());
+                            os.write((msg.obj.toString() + "\n").getBytes("utf-8"));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+            };
+            // 启动Looper
+            Looper.loop();
+
+        } catch (SocketTimeoutException e) {
+
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
+
+    }
+}

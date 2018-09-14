@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.smyhvae.myapplication.debug"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="18"
+        android:targetSdkVersion="26" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <meta-data
+        android:name="android.support.VERSION"
+        android:value="26.0.0-alpha1" />
+
+    <uses-permission android:name="android.permission.FLASHLIGHT" /> <!-- Don't require camera, as this requires a rear camera. This allows it to work on the Nexus 7 -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="false" /> <!-- TODO replace above two with next line after Android 4.2 -->
+    <!-- <uses-feature android:name="android.hardware.camera.any"/> -->
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.screen.landscape"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.wifi"
+        android:required="false" /> <!-- TODO make this not required again after android.hardware.camera.any is available -->
+    <!-- Donut-specific flags which allow us to run on any dpi screens. -->
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+
+    <application
+        android:name="com.smyhvae.myapplication.MyApplication"
+        android:allowBackup="true"
+        android:debuggable="true"
+        android:icon="@mipmap/hd"
+        android:label="启豹店员测试版"
+        android:roundIcon="@mipmap/hd"
+        android:supportsRtl="true"
+        android:testOnly="true"
+        android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="app_name"
+            android:value="启豹店员测试版" />
+
+        <activity android:name="com.smyhvae.myapplication.ValidateActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.smyhvae.myapplication.ValidateActivity" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.smyhvae.myapplication.RegeditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.smyhvae.myapplication.ContentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.smyhvae.myapplication.TabActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.smyhvae.myapplication.BottomActivity"
+            android:label="@string/title_activity_bottom"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.smyhvae.myapplication.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name="com.smyhvae.myapplication.StyleActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.smyhvae.myapplication.MainActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity
+            android:name="com.smyhvae.myapplication.AboutUsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.smyhvae.myapplication.HelpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.smyhvae.myapplication.PersonalInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.smyhvae.myapplication.ColorSizeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name="com.smyhvae.myapplication.PaymentActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name="com.smyhvae.myapplication.SelectSalesBillActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.smyhvae.myapplication.AddStyleActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.smyhvae.myapplication.AddClientActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.smyhvae.myapplication.SelectColorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.smyhvae.myapplication.SelectSizeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.smyhvae.myapplication.PrintActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.smyhvae.myapplication.PhotoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.smyhvae.myapplication.AddColorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.smyhvae.myapplication.AddSizeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.smyhvae.myapplication.AddBrandActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.smyhvae.myapplication.AddSupplierActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.smyhvae.myapplication.AddClassActivity"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name="com.smyhvae.myapplication.LoginIntentService"
+            android:exported="false" />
+        <service android:name="com.smyhvae.service.ValidateService" />
+        <service
+            android:name="com.smyhvae.service.RegeditService"
+            android:exported="false" />
+        <service
+            android:name="com.smyhvae.service.HandlerService"
+            android:exported="false" />
+        <service android:name="com.smyhvae.service.PrintService" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.smyhvae.provider.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity
+            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name="com.google.zxing.client.android.CaptureActivity"
+            android:clearTaskOnLaunch="true"
+            android:screenOrientation="sensorLandscape"
+            android:stateNotNeeded="true"
+            android:theme="@style/zxing_CaptureTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.google.zxing.client.android.HelpActivity"
+            android:label="@string/zxing_menu_help"
+            android:screenOrientation="user"
+            android:stateNotNeeded="true" />
+        <activity
+            android:name="com.google.zxing.client.android.encode.EncodeActivity"
+            android:screenOrientation="user" />
+        <activity
+            android:name="com.google.zxing.client.androidlegacy.CaptureActivity"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape"
+            android:stateNotNeeded="true"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.google.zxing.client.androidlegacy.HelpActivity"
+            android:screenOrientation="user" />
+        <activity
+            android:name="com.google.zxing.client.androidlegacy.encode.EncodeActivity"
+            android:screenOrientation="user" />
+
+        <provider
+            android:name="com.android.tools.ir.server.InstantRunContentProvider"
+            android:authorities="com.smyhvae.myapplication.debug.com.android.tools.ir.server.InstantRunContentProvider"
+            android:multiprocess="true" />
+    </application>
+
+</manifest>

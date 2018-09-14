@@ -1,6 +1,7 @@
 package com.smyhvae.myapplication;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -16,6 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -499,7 +501,8 @@ public class StyleActivity extends Activity implements View.OnClickListener{
 
     }
 
-    private Handler handler = new Handler() {
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler(Looper.getMainLooper()) {
         public void handleMessage(Message msg) {
             DataUtil dataUtil = new DataUtil();
             if (msg.what == 1) {
@@ -1172,9 +1175,7 @@ public class StyleActivity extends Activity implements View.OnClickListener{
                                 if (TextUtils.isEmpty(supplier.getText().toString())){
                                     clientid = null;
                                 }
-                                if (TextUtils.isEmpty(brand.getText().toString())) {
-                                    brand = null;
-                                }
+
                                 if (classid != null){
                                     FuStyleClassModel styleClassModel = new FuStyleClassModel();
                                     styleClassModel.setClassid(classid);
@@ -1222,6 +1223,7 @@ public class StyleActivity extends Activity implements View.OnClickListener{
                                     DialogUtil.showDialog(getApplicationContext(), baseModel.getMessage(), false);
                                 }
                                 dialog.dismiss();
+                                StyleActivity.this.finish();
                             }
                         }
                     }).setTitle("提示").show();

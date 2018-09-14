@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFF</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="paleVioletRed">#DB7093</color>
+    <color name="saddleBrown">#8B4513</color>
+    <color name="chocolate">#D2691E</color>
+    <color name="black">#000</color>
+    <color name="lightCoral">#FFDEB6B6</color>
+
+    <!-- 描边颜色 -->
+    <color name="border_clo">#ccc</color>
+    <color name="text_clo">#333</color>
+    <color name="white">#fff</color>
+    <color name="blue">#419DE4</color>
+    <color name="limegreen">#32CD32</color>
+
+    <color name="text_gray_000">#000</color>
+
+    <color name="font_gray_b">#d4d4d3</color>
+
+    <color name="font_tab_1">#42369a</color>
+    <color name="font_tab_0">#b1b1b1</color>
+    <color name="font_common_1">#424242</color>
+    <color name="font_common_2">#a1a1a1</color>
+    <color name="font_blue">#42369a</color>
+    <color name="font_green">#00cccc</color>
+    <color name="commom_background">#f3f3f3</color>
+
+</resources>

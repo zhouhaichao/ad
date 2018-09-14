@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator.WIN-BOJ5VT4KFTF\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.6.0\98476622f10715998eacf9240d6b479f12c66143\okio-1.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="98476622f10715998eacf9240d6b479f12c66143">
+        <dex dex="D:\android\workspaces\ad\app\build\intermediates\pre-dexed\debug\okio-1.6.0_0264266fcbd3a39e2e59ceb2f0acb705bfbb2b68.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator.WIN-BOJ5VT4KFTF\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\2.0.1\516c03b21d50a644d538de0f0369c620989cd8f0\jsr305-2.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="516c03b21d50a644d538de0f0369c620989cd8f0">
+        <dex dex="D:\android\workspaces\ad\app\build\intermediates\pre-dexed\debug\jsr305-2.0.1_31685529c6b8c7876d7dfec9bb9a64f62fe26b94.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android\workspaces\ad\app\libs\SQLiteStudioRemote.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="5cdb72fcc11580fc0a98362bb04d01283a2d9a36">
+        <dex dex="D:\android\workspaces\ad\app\build\intermediates\pre-dexed\debug\SQLiteStudioRemote_d0952be271b838f41082598afee95c338a3beee0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android\workspaces\ad\app\libs\gson-2.2.3.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="91ac0b4c3a38b721c7548baa239950f23b65b56e">
+        <dex dex="D:\android\workspaces\ad\app\build\intermediates\pre-dexed\debug\gson-2.2.3_bbe0bcb9af02731dee40e79f8bc35f461b854923.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator.WIN-BOJ5VT4KFTF\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.0.1\b34c1f2d993044656e87f88970b6818e99e886ba\okhttp-3.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="b34c1f2d993044656e87f88970b6818e99e886ba">
+        <dex dex="D:\android\workspaces\ad\app\build\intermediates\pre-dexed\debug\okhttp-3.0.1_a186bbfbb374ea98a77ea0a93d7153e501f5436c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android\workspaces\ad\app\libs\nineoldandroids-2.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="a43cf9e271b5bc564e880a0a4be63ab9c69c97f8">
+        <dex dex="D:\android\workspaces\ad\app\build\intermediates\pre-dexed\debug\nineoldandroids-2.4.0_b6c9ade6ce56b1fdeead72309237b38b0197305d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android\workspaces\ad\app\libs\httpclient.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="5ee21ae410eb64471a677ed155d6cfb05423a8a5">
+        <dex dex="D:\android\workspaces\ad\app\build\intermediates\pre-dexed\debug\httpclient_d003e21038c3c4691f1707afc3411291864881c9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android\workspaces\ad\app\libs\junit-4.10.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e4f1766ce7404a08f45d859fb9c226fc9e41a861">
+        <dex dex="D:\android\workspaces\ad\app\build\intermediates\pre-dexed\debug\junit-4.10_4457140dbd5f9714d91acd9aa77a9a64408a40ce.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator.WIN-BOJ5VT4KFTF\.gradle\caches\modules-2\files-2.1\com.facebook.stetho\stetho\1.3.1\2c4076b466a0eb4d6ddf5721edd35cd1adc1f317\stetho-1.3.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="2c4076b466a0eb4d6ddf5721edd35cd1adc1f317">
+        <dex dex="D:\android\workspaces\ad\app\build\intermediates\pre-dexed\debug\stetho-1.3.1_8269716b0846c0126410b97df20e050e5f67db31.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\android\workspaces\ad\app\libs\jna.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="284ae7e5a971e547b94313662d21dbd61daad3f8">
+        <dex dex="D:\android\workspaces\ad\app\build\intermediates\pre-dexed\debug\jna_3f813f843f2c989320803612dc8d6c6d12468e02.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator.WIN-BOJ5VT4KFTF\.gradle\caches\modules-2\files-2.1\commons-cli\commons-cli\1.2\2bf96b7aa8b611c177d329452af1dc933e14501c\commons-cli-1.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="2bf96b7aa8b611c177d329452af1dc933e14501c">
+        <dex dex="D:\android\workspaces\ad\app\build\intermediates\pre-dexed\debug\commons-cli-1.2_929530a82c207c182b077f0b2f2beae77faa11e3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Administrator.WIN-BOJ5VT4KFTF\.gradle\caches\modules-2\files-2.1\com.facebook.stetho\stetho-okhttp3\1.3.1\c596b3b33b5a92107bb70544bb5ee35f597bc6d8\stetho-okhttp3-1.3.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="c596b3b33b5a92107bb70544bb5ee35f597bc6d8">
+        <dex dex="D:\android\workspaces\ad\app\build\intermediates\pre-dexed\debug\stetho-okhttp3-1.3.1_5e3afc25b6d55c7189abb82deb4bf67e8412b608.jar" />
+    </item>
+
+</items>

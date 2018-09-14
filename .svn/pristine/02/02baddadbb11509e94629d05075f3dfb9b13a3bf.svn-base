@@ -1,0 +1,161 @@
+package com.smyhvae.view.RecycleView;
+
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
+import com.aspsine.swipetoloadlayout.OnRefreshListener;
+import com.smyhvae.fragment.SalesBillFragment;
+import com.smyhvae.fragment.StyleFragment;
+import com.smyhvae.myapplication.MyApplication;
+import com.smyhvae.myapplication.PhotoActivity;
+import com.smyhvae.myapplication.R;
+import com.smyhvae.service.PhotoService;
+import com.smyhvae.view.DialogPhotoView;
+import com.smyhvae.view.ListItem;
+import com.smyhvae.view.SwipeListLayout;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+/**
+ * Created by Administrator on 2018/3/29.
+ */
+
+public class StyleRecycleViewAdapter extends RecyclerView.Adapter<StyleRecycleViewAdapter.ViewHolder>{
+
+
+    public List<ListItem> list;
+    public LayoutInflater inflater;
+    public StyleFragment styleFragment;
+    private Context context;
+    private static int w_screen;
+    private int h_screen;
+
+
+    public StyleRecycleViewAdapter(StyleFragment styleFragment, List<ListItem> list, int w_screen, int h_screen) {
+        this.list = list;
+        this.styleFragment = styleFragment;
+        this.context =styleFragment.getContext();
+        this.inflater = LayoutInflater.from(styleFragment.getContext());
+        this.w_screen = w_screen;
+        this.h_screen = h_screen;
+    }
+
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.stylelist, parent, false);
+        // 实例化viewholder
+        ViewHolder viewHolder = new ViewHolder(v);
+        return viewHolder;
+    }
+
+
+
+    @Override
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        // 获取到mList中指定索引位置的资源
+        Drawable img = list.get(position).getImage();
+        String code = list.get(position).getCode();
+        String name = list.get(position).getName();
+        String amount = list.get(position).getAmount();
+        String pricetypeString = list.get(position).getPricetypeString();
+        String price = list.get(position).getPrice();
+        String marketdate = list.get(position).getMarketdate();
+
+        holder.imageView.setImageDrawable(img);
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(list.get(position).getImageId()!=null)
+                {
+                    Intent intent = new Intent(context, PhotoActivity.class);
+                    intent.putExtra("id",list.get(position).getImageId());
+                    context.startActivity(intent);
+                }
+                    //new DialogPhotoView(context,photoService.getUrlPhoto(filesurl,accessKey,loginstaffid,logininvid,accountid,list.get(position).getImageId(),0)).show();
+            }
+        });
+
+        if(list.get(position).getStatus()==1)
+        {
+            holder.lay_style_price.setBackground(context.getResources().getDrawable(R.drawable.undercarriage));
+        }
+        else
+        {
+            holder.lay_style_price.setBackground(null);
+        }
+        holder.id = list.get(position).getId();
+        holder.code.setText(code);
+        holder.name.setText(name);
+        holder.amount.setText(amount);
+        holder.pricetypeString.setText(pricetypeString);
+        holder.price.setText("￥"+price);
+        holder.marketdate.setText(marketdate);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                styleFragment.statrActivity(holder.id);
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return list == null ? 0 : list.size();
+    }
+
+    public void notifyData(List<ListItem> ItemList) {
+        if (ItemList != null) {
+            int previousSize = list.size();
+            list.clear();
+            notifyItemRangeRemoved(0, previousSize);
+            list.addAll(ItemList);
+            notifyItemRangeInserted(0, ItemList.size());
+        }
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        public ImageView imageView;
+        public Integer id;
+        public Integer imageId;
+        public TextView code;
+        public TextView name;
+        public TextView amount;
+        public TextView pricetypeString;
+        public TextView price;
+        public TextView marketdate;
+        public LinearLayout lay_style;
+        public LinearLayout lay_style_price;
+
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            lay_style = itemView.findViewById(R.id.lay_style);
+            lay_style_price = itemView.findViewById(R.id.lay_style_price);
+           /* LinearLayout.LayoutParams lay_styleparams = new LinearLayout.LayoutParams((w_screen-54)/2, ViewGroup.LayoutParams.WRAP_CONTENT);
+            lay_styleparams.gravity= Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL;
+            lay_style.setOrientation(LinearLayout.VERTICAL);
+            lay_style.setLayoutParams(lay_styleparams);*/
+            imageView = itemView.findViewById(R.id.image);
+
+            code = itemView.findViewById(R.id.code);
+            name = itemView.findViewById(R.id.name);
+            amount = itemView.findViewById(R.id.amount);
+            pricetypeString = itemView.findViewById(R.id.pricetypeString);
+            price = itemView.findViewById(R.id.price);
+            marketdate = itemView.findViewById(R.id.marketdate);
+        }
+    }
+}

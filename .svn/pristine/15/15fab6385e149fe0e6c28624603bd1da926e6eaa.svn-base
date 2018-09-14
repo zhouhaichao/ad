@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "D:\\android\\workspaces\\ad\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_home_black_24dp.xml",
+        "source": "D:\\android\\workspaces\\ad\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_home_black_24dp.xml"
+    },
+    {
+        "merged": "D:\\android\\workspaces\\ad\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_dashboard_black_24dp.xml",
+        "source": "D:\\android\\workspaces\\ad\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_dashboard_black_24dp.xml"
+    },
+    {
+        "merged": "D:\\android\\workspaces\\ad\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_notifications_black_24dp.xml",
+        "source": "D:\\android\\workspaces\\ad\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_notifications_black_24dp.xml"
+    },
+    {
+        "merged": "D:\\android\\workspaces\\ad\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\design_ic_visibility_off.xml",
+        "source": "C:\\Users\\Administrator.WIN-BOJ5VT4KFTF\\.android\\build-cache\\a37d6615f36a6f46a54ffb816d511ac37a7eff4e\\output\\res\\drawable-anydpi-v21\\design_ic_visibility_off.xml"
+    },
+    {
+        "merged": "D:\\android\\workspaces\\ad\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\design_ic_visibility.xml",
+        "source": "C:\\Users\\Administrator.WIN-BOJ5VT4KFTF\\.android\\build-cache\\a37d6615f36a6f46a54ffb816d511ac37a7eff4e\\output\\res\\drawable-anydpi-v21\\design_ic_visibility.xml"
+    }
+]

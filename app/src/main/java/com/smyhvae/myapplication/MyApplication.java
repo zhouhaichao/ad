@@ -1,6 +1,7 @@
 package com.smyhvae.myapplication;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
@@ -26,12 +27,20 @@ public class MyApplication extends Application {
     }
 
     private String fileUploadIp;
+
+    private static Context mContext;
+
+
+    public static Context getContext() {
+        return mContext;
+    }
     @Override
     public void onCreate() {
         super.onCreate();
         init();
     }
     private void init(){
+        mContext = getApplicationContext();
         Stetho.initializeWithDefaults(this);
         new OkHttpClient.Builder()
                 .addNetworkInterceptor(new StethoInterceptor())

@@ -1,0 +1,54 @@
+package com.smyhvae.myapplication;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class PersonalInfoActivity extends Activity implements View.OnClickListener{
+    private MyApplication application;
+
+    private ImageView back;
+    private TextView name;
+    private TextView code;
+    private TextView role;
+    private TextView invString;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_personal_info);
+        application = (MyApplication)getApplicationContext();
+
+        back = findViewById(R.id.back);
+        name = findViewById(R.id.name);
+        code = findViewById(R.id.code);
+        role = findViewById(R.id.role);
+        invString = findViewById(R.id.invString);
+
+        name.setText(application.getFuStaffModel().getName());
+        code.setText(application.getFuStaffModel().getCode());
+        role.setText(application.getFuStaffModel().getFuRoleList().get(0).getName());
+        invString.setText(application.getFuStaffModel().getFuInventoryList().get(0).getName());
+
+        back.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.back:
+                Intent myIntent = new Intent(PersonalInfoActivity.this, MainActivity.class);
+                myIntent.putExtra("i", "3");
+                startActivity(myIntent);
+                this.finish();
+                break;
+            default:
+                break;
+        }
+    }
+}

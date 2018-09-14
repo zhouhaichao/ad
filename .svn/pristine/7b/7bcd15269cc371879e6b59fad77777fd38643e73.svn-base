@@ -1,0 +1,122 @@
+package com.smyhvae.view;
+
+import android.content.Context;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.smyhvae.myapplication.R;
+
+import java.util.List;
+
+
+public class StyleListViewAdapter extends BaseAdapter {
+    public List<ListItem> list;
+    public LayoutInflater inflater;
+    private Context context;
+    private int w_screen;
+    private int h_screen;
+
+    public StyleListViewAdapter(Context context, List<ListItem> list, int w_screen, int h_screen) {
+        this.list = list;
+        this.inflater = LayoutInflater.from(context);
+        this.w_screen = w_screen;
+        this.h_screen = h_screen;
+    }
+
+    /**
+     * 返回item的个数
+     */
+    @Override
+    public int getCount() {
+        return list.size();
+    }
+
+    /**
+     * 返回item的内容
+     */
+    @Override
+    public Object getItem(int position) {
+        return list.get(position);
+    }
+
+    /**
+     * 返回item的id
+     */
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    /**
+     * 返回item的视图
+     */
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View view = null;
+        ListItemView listItemView = null;
+        // 初始化item view
+        if (convertView == null) {
+            // 通过LayoutInflater将xml中定义的视图实例化到一个View中
+            view = inflater.inflate(R.layout.stylelist, null);
+            listItemView = new ListItemView();
+            listItemView.lay_style = view.findViewById(R.id.lay_style);
+            listItemView.lay_style_price = view.findViewById(R.id.lay_style_price);
+            LinearLayout.LayoutParams lay_styleparams = new LinearLayout.LayoutParams((w_screen-54)/2, ViewGroup.LayoutParams.WRAP_CONTENT);
+            lay_styleparams.gravity= Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL;
+            listItemView.lay_style.setOrientation(LinearLayout.VERTICAL);
+            listItemView.lay_style.setLayoutParams(lay_styleparams);
+
+            listItemView.imageView = (ImageView) view.findViewById(R.id.image);
+            listItemView.code = (TextView) view.findViewById(R.id.code);
+            listItemView.name = view.findViewById(R.id.name);
+            listItemView.amount = view.findViewById(R.id.amount);
+            listItemView.pricetypeString = view.findViewById(R.id.pricetypeString);
+            listItemView.price = view.findViewById(R.id.price);
+            listItemView.marketdate = view.findViewById(R.id.marketdate);
+
+            view.setTag(listItemView);
+        } else {
+            view = convertView;
+            listItemView = (ListItemView) view.getTag();
+        }
+
+        // 获取到mList中指定索引位置的资源
+        // Drawable img = list.get(position).getImage();
+        String code = list.get(position).getCode();
+        String name = list.get(position).getName();
+        String amount = list.get(position).getAmount();
+        String pricetypeString = list.get(position).getPricetypeString();
+        String price = list.get(position).getPrice();
+        String marketdate = list.get(position).getMarketdate();
+
+//      listItemView.imageView.setImageDrawable(img);
+        listItemView.id = list.get(position).getId();
+        listItemView.code.setText(code);
+        listItemView.name.setText(name);
+        listItemView.amount.setText(amount);
+        listItemView.pricetypeString.setText(pricetypeString);
+        listItemView.price.setText("￥"+price);
+        listItemView.marketdate.setText(marketdate);
+        // 返回convertView对象
+        return view;
+    }
+
+    public static class ListItemView {
+        public ImageView imageView;
+        public Integer id;
+        public TextView code;
+        public TextView name;
+        public TextView amount;
+        public TextView pricetypeString;
+        public TextView price;
+        public TextView marketdate;
+        public LinearLayout lay_style;
+        public LinearLayout lay_style_price;
+    }
+}

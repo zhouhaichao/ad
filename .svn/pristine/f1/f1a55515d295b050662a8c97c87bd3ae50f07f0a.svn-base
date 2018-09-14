@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/traceroute_rootview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@mipmap/login_first"
+    android:onClick="true">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="启   豹"
+        android:textColor="@color/paleVioletRed"
+        android:textSize="30sp"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"/>
+    <!-- 整个LinearLayout是账号和请输入账号的矩形框架 -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp"
+        android:paddingLeft="10sp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/account"
+            android:textColor="@android:color/black"
+            android:textSize="16.0sp"
+            android:layout_marginRight="35dp"/>
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overlapAnchor="false"
+            android:spinnerMode="dropdown"
+            android:dropDownVerticalOffset="-10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:padding="10sp"
+        android:background="@color/colorPrimary">
+        <!-- 帐号的布局 -->
+        <TextView
+            android:id="@+id/tv_loginAccount"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/loginName"
+            android:textColor="@android:color/black"
+            android:textSize="18.0sp" />
+        <!-- EditText表示的是请输入帐号的一个布局 -->
+        <EditText
+            android:id="@+id/loginAccount_id"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:ems="10"
+            android:hint="@string/inputName"
+            android:padding="5.0dip"
+            android:paddingRight="40dp"
+            android:textColor="#ff3b3b3b"
+            android:textSize="16.0sp"></EditText>
+    </LinearLayout>
+    <!-- 密码和请输入密码的整个布局 -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:background="@color/colorPrimary">
+        <!-- 密码的布局 -->
+        <TextView
+            android:id="@+id/tv_password"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/password"
+            android:textColor="@android:color/black"
+            android:textSize="18.0sp"/>
+        <!-- 请输入密码的布局 -->
+        <EditText
+            android:id="@+id/password_id"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:ems="10"
+            android:hint="@string/inputPassword"
+            android:inputType="textPassword"
+            android:padding="5.0dip"
+            android:paddingRight="30dp"
+            android:textColor="#ff3b3b3b"
+            android:textSize="16.0sp"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/login"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="登     录"
+        android:layout_marginTop="10dp"
+        android:textColor="#ff0000" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="企业编号："
+            android:textSize="12dp"
+            android:textColor="@color/saddleBrown"/>
+        <TextView
+            android:id="@+id/codeno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/saddleBrown"
+            android:textSize="12dp"
+            android:text="201709222215123"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NO："
+            android:textSize="12dp"
+            android:textColor="@color/saddleBrown"
+            android:layout_marginLeft="15dp"/>
+        <TextView
+            android:id="@+id/no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/saddleBrown"
+            android:textSize="12dp"
+            android:text="1"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全国客服热线："
+            android:textSize="12dp"
+            android:textColor="@color/saddleBrown"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="400-835-1880"
+            android:textSize="14dp"
+            android:textColor="@color/saddleBrown"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,502 @@
+package com.smyhvae.fragment;
+
+import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.text.format.DateFormat;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.smyhvae.model.FuAmountModel;
+import com.smyhvae.model.FuBaseModel;
+import com.smyhvae.model.FuSalesBillModel;
+import com.smyhvae.myapplication.MyApplication;
+import com.smyhvae.myapplication.R;
+import com.smyhvae.myapplication.SelectSalesBillActivity;
+import com.smyhvae.service.BaseService;
+import com.smyhvae.service.SalesBillService;
+import com.smyhvae.util.DataUtil;
+import com.smyhvae.util.DialogUtil;
+import com.smyhvae.util.Logcat;
+import com.smyhvae.view.ListItem;
+import com.smyhvae.view.ListViewAdapter;
+import com.smyhvae.view.MyAdapter;
+import com.smyhvae.view.XListView;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+public class SalesBillFragment extends Fragment implements View.OnClickListener, XListView.IXListViewListener{
+    private MyApplication application;
+    private String accessKey;
+    private int accountid;
+    private int loginstaffid;
+    private int logininvid;
+    private String webServerUrl;
+    int w_screen=0;
+    int h_screen=0;
+
+    private View view;
+    public ListViewAdapter listViewAdapter;
+    public XListView listView;
+    private List<ListItem> list = new ArrayList<>();
+    private int page = 1;
+    private int count=0;
+    private TextView tv_searchSalesBill;
+    private TextView tv_clearSalesBill;
+    private TextView tv_code;
+    private TextView tv_occurrencetime;
+    private TextView tv_client;
+    private TextView tv_amount;
+    private TextView tv_money;
+    private TextView tv_realmoney;
+    private TextView tv_paymentString;
+    private EditText et_code;
+    private EditText et_start;
+    private EditText et_end;
+    private Spinner et_status;
+    private EditText et_clientid;
+    private EditText et_class;
+    private TextView countNum;
+    private TextView amountSum;
+    private TextView totalSum;
+    private TextView realmoneySum;
+    private String beginCode;
+    private String clientid;
+    private String start;
+    private String end;
+    private Integer status=0;
+    private String result;
+    private FuAmountModel amountModel;
+
+    private ListView mListView;
+    private List<FuBaseModel> testArray = new ArrayList<>();
+    private MyAdapter adapter;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        application = (MyApplication) getActivity().getApplicationContext();
+        accessKey = application.getAccessKey();
+        accountid = application.getFuStaffModel().getAccountid();
+        loginstaffid = application.getFuStaffModel().getId();
+        logininvid = application.getFuStaffModel().getFuInventoryList().get(0).getId();
+        webServerUrl = application.getWebServerUrl();
+        DisplayMetrics dm =getResources().getDisplayMetrics();
+        w_screen = dm.widthPixels;
+        h_screen = dm.heightPixels;
+        view = inflater.inflate(R.layout.salesbill_list, container, false);
+        tv_searchSalesBill = view.findViewById(R.id.tv_searchSalesBill);
+        tv_clearSalesBill = view.findViewById(R.id.tv_clearSalesBill);
+        listView = view.findViewById(R.id.listView);
+        countNum = view.findViewById(R.id.count);
+        amountSum = view.findViewById(R.id.amountSum);
+        totalSum = view.findViewById(R.id.totalSum);
+        realmoneySum = view.findViewById(R.id.realmoneySum);
+
+        tv_code = view.findViewById(R.id.tv_code);
+        tv_occurrencetime = view.findViewById(R.id.tv_occurrencetime);
+        tv_client = view.findViewById(R.id.tv_client);
+        tv_amount = view.findViewById(R.id.tv_amount);
+        tv_money = view.findViewById(R.id.tv_money);
+        tv_realmoney = view.findViewById(R.id.tv_realmoney);
+        tv_paymentString = view.findViewById(R.id.tv_paymentString);
+        int width = w_screen/7;
+        tv_code.setWidth(w_screen/12);
+        tv_code.setGravity(Gravity.CENTER);
+        tv_occurrencetime.setWidth(width);
+        tv_occurrencetime.setGravity(Gravity.CENTER);
+        tv_client.setWidth(width);
+        tv_client.setGravity(Gravity.CENTER);
+        tv_amount.setWidth(width);
+        tv_amount.setGravity(Gravity.CENTER);
+        tv_money.setWidth(width);
+        tv_money.setGravity(Gravity.CENTER);
+        tv_realmoney.setWidth(width);
+        tv_realmoney.setGravity(Gravity.CENTER);
+        tv_paymentString.setWidth(w_screen/5);
+        tv_paymentString.setGravity(Gravity.CENTER);
+        et_code = view.findViewById(R.id.et_code);
+        et_code.setWidth(w_screen/3);
+        et_start = view.findViewById(R.id.et_start);
+        et_start.setText(sdf.format(new Date()));
+        et_start.setWidth(w_screen/3);
+        et_end = view.findViewById(R.id.et_end);
+        et_end.setText(sdf.format(new Date()));
+        et_end.setWidth(w_screen/3);
+        et_status = view.findViewById(R.id.et_status);
+        et_clientid = view.findViewById(R.id.et_clientid);
+        et_clientid.setWidth(w_screen/3);
+        et_class = view.findViewById(R.id.et_class);
+        et_class.setWidth(w_screen/3);
+
+        mListView = (ListView) view.findViewById(R.id.auto_list);
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        tv_searchSalesBill.setOnClickListener(this);
+        tv_clearSalesBill.setOnClickListener(this);
+        setFirstData();
+        listViewAdapter = new ListViewAdapter(this, getContext(), list, w_screen, h_screen);
+        listView.setAdapter(listViewAdapter);
+        listView.setXListViewListener(this);
+        listView.setPullLoadEnable(true);
+        if (count < 20 ){
+            listView.setPullLoadEnable(false);
+        }
+        listView.setFooterDividersEnabled(false);
+        listView.setHeaderDividersEnabled(false);
+
+
+        //时间选项卡
+        final Calendar c = Calendar.getInstance();
+        et_start.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog dialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        c.set(year, monthOfYear, dayOfMonth);
+                        et_start.setText(DateFormat.format("yyy-MM-dd", c));
+                    }
+                }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+                dialog.show();
+            }
+        });
+
+        et_end.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog dialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        c.set(year, monthOfYear, dayOfMonth);
+                        et_end.setText(DateFormat.format("yyy-MM-dd", c));
+                    }
+                }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+                dialog.show();
+            }
+        });
+
+        //客户AC
+        adapter = new MyAdapter(getActivity(), testArray);
+        mListView.setAdapter(adapter);// 设置Adapter，初始值为空
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {// listView点击事件
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                clientid = adapter.getItem(position).getId().toString();
+                et_clientid.setText(adapter.getItem(position).getName());
+                mListView.setVisibility(View.GONE);
+            }
+        });
+
+        et_clientid.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                testArray = new ArrayList<>();// 每次输入的时候，重新初始化数据列表
+                if (!TextUtils.isEmpty(et_clientid.getText().toString())) {// 判断输入内容是否为空，为空则跳过
+                    testArray =getAC("clientListForAC");
+                }
+                adapter.refreshData(testArray);// Adapter刷新数据
+                mListView.setVisibility(View.VISIBLE);
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    // 上拉加载更多
+    public void getRecordUpPullForeRefresh(final int page, final int showCount) {
+        // 网络判断
+        new Thread() {
+            public void run() {
+                result = result(page, showCount, beginCode, start, end, clientid, status);
+                list = getData(result);
+                Message msg = Message.obtain();
+                msg.what = 1;
+                msg.obj = list;
+                handler.sendMessage(msg);
+            }
+        }.start();
+    }
+
+    // 下拉刷新最新数据
+    public void getRecordDownPullForeRefresh( final int page, final int showCount) {
+        new Thread() {
+            public void run() {
+                if (page == 1) {
+                    list.clear();
+                    start = et_start.getText().toString().trim();
+                    end = et_end.getText().toString().trim();
+                    result = result(page, showCount, beginCode, start, end, clientid, status);
+                    list = getData(result);
+                }
+                Message msg = Message.obtain();
+                msg.what = 2;
+                msg.obj = list;
+                handler.sendMessage(msg);
+
+            }
+        }.start();
+    }
+
+    @SuppressLint("HandlerLeak")
+    Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            onLoad();
+            switch (msg.what) {
+                case 1:
+                    listViewAdapter.notifyDataSetChanged();
+                    Log.d("sfn", list.size()+"***"+count);
+                    if (list.size() >= count) {
+                        listView.setPullLoadEnable(false);
+                    }
+                    break;
+                case 2:
+                    if (list.size() == 20) {
+                        listView.setPullLoadEnable(true);
+                    }
+                    listViewAdapter.notifyDataSetChanged();
+                    break;
+                case 3:
+                    countNum.setText(String.valueOf(count));
+                    break;
+                case 4:
+                    if (amountModel.getSumAmount() != null){
+                        amountSum.setText(amountModel.getSumAmount().toString());
+                        totalSum.setText(amountModel.getSumTotal().toString());
+                    }else {
+                        amountSum.setText("");
+                        totalSum.setText("");
+                    }
+                    if (amountModel.getSumRealMoney() != null){
+                        realmoneySum.setText(String.valueOf(amountModel.getSumRealMoney().intValue()));
+                    }else {
+                        realmoneySum.setText("");
+                    }
+                    break;
+                case -1:
+                    page--;
+                    Toast.makeText(getActivity(), "数据加载失败！", Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    break;
+            }
+            listView.stopRefresh();
+            listView.stopLoadMore();
+        }
+    };
+
+    // 下拉刷新数据
+    @Override
+    public void onRefresh() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                page = 1;
+                getRecordDownPullForeRefresh(page, 20);
+            }
+        }, 1200);
+    }
+
+    // 上拉加载更多
+    @Override
+    public void onLoadMore() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                page++;
+                getRecordUpPullForeRefresh(page, 20);
+            }
+        }, 1000);
+    }
+
+    private void onLoad() {
+        listView.stopRefresh();
+        listView.stopLoadMore();
+    }
+    // 第一次加载数据
+    public void setFirstData() {
+        start = et_start.getText().toString().trim();
+        end = et_end.getText().toString().trim();
+        result = result(1, 20, beginCode, start, end, clientid, status);
+        list = getData(result);
+        if (list.size() > 0){
+            return;
+        }
+    }
+
+    @Override
+    public View getView() {
+        return view;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tv_clearSalesBill:
+                et_code.setText("");
+                et_clientid.setText("");
+                et_start.setText("");
+                et_end.setText("");
+                et_status.setSelection(0);
+                et_class.setText("");
+                break;
+            case R.id.tv_searchSalesBill:
+                list.clear();
+                beginCode = et_code.getText().toString().trim();
+                start = et_start.getText().toString().trim();
+                end = et_end.getText().toString().trim();
+                status = et_status.getSelectedItemPosition();
+                if (et_clientid.getText().toString() == null || ("").equals(et_clientid.getText().toString())){
+                    clientid = null;
+                }
+                result = result(1, 20, beginCode, start, end, clientid, status);
+                list = getData(result);
+                listViewAdapter = new ListViewAdapter(this, getContext(), list, w_screen, h_screen);
+                listView.setAdapter(listViewAdapter);
+                if (count<20){
+                    listView.setPullLoadEnable(false);
+                }else {
+                    listView.setPullLoadEnable(true);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    public String result(final int page, final int showCount, final String beginCode,
+                       final String start, final String end, final String clientid, final Integer status){
+        SalesBillService salesBillService = new SalesBillService();
+        result = salesBillService.doSalesBillList(webServerUrl, loginstaffid, logininvid, accessKey, accountid, page, showCount, beginCode, start, end, clientid, status);
+        Logcat.show(result);
+        return result;
+    }
+
+    public List getData(String result){
+        DataUtil dataUtil = new DataUtil();
+        FuBaseModel baseModel = dataUtil.message(result);
+        if(baseModel.getResultCode().intValue() ==1){
+            count = dataUtil.count(result);
+//            countNum.setText(String.valueOf(count));
+            Message msg = Message.obtain();
+            msg.what = 3;
+            msg.obj = count;
+            handler.sendMessage(msg);
+            SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
+            List<FuSalesBillModel> salesBillModelList = dataUtil.getSalesBillListData(result);
+            for (FuSalesBillModel fuSalesBillModel: salesBillModelList) {
+                ListItem item = new ListItem();
+                item.setId(fuSalesBillModel.getId());
+                item.setCode(fuSalesBillModel.getCode().toString());
+                item.setOccurrencetime(sdf.format(fuSalesBillModel.getOccurrencetime()));
+                item.setClientString(fuSalesBillModel.getClientString());
+                item.setAmount(fuSalesBillModel.getAmount().toString());
+                item.setPreSalesTotal(fuSalesBillModel.getPreSalesTotal().intValue());
+                if (fuSalesBillModel.getRealMoney() != null){
+                    item.setRealMoney(fuSalesBillModel.getRealMoney().intValue());
+                }
+                item.setCash(fuSalesBillModel.getCash().intValue());
+                item.setSwingCard(fuSalesBillModel.getSwingCard().intValue());
+                item.setRemit(fuSalesBillModel.getRemit().intValue());
+                item.setStatus(fuSalesBillModel.getStatus());
+
+                list.add(item);
+            }
+            amountModel = dataUtil.sum(result);
+            if (amountModel != null){
+                msg = Message.obtain();
+                msg.what = 4;
+                msg.obj = amountModel;
+                handler.sendMessage(msg);
+            }
+        }else if(baseModel.getResultCode().intValue() ==0){
+            DialogUtil.showDialog(getActivity(), baseModel.getMessage(), false);
+        }
+
+        return list;
+    }
+
+    public List<FuBaseModel> getAC(String methodid){
+        String input = et_clientid.getText().toString().trim();
+        BaseService baseService = new BaseService();
+        result = baseService.doListForAC(webServerUrl, methodid, loginstaffid, logininvid, accessKey, accountid, input, null);
+        Logcat.show(result);
+        DataUtil dataUtil = new DataUtil();
+        FuBaseModel baseModel = dataUtil.message(result);
+        List<FuBaseModel> baseModelList = new ArrayList<>();
+        if(baseModel.getResultCode().intValue() ==1){
+            baseModelList = dataUtil.getDataListForAC(result);
+        }else if(baseModel.getResultCode().intValue() ==0){
+            DialogUtil.showDialog(getContext(), baseModel.getMessage(), false);
+        }
+        return baseModelList;
+    }
+
+    public static final int  REQUEST_CODE=1001;
+
+    public void openActivity(int id){
+        Intent intent  = new Intent(getActivity(), SelectSalesBillActivity.class);
+        intent.putExtra("id", id);
+        startActivityForResult(intent, REQUEST_CODE);
+    }
+
+    public void disableSalesBill(int id){
+        DataUtil dataUtil = new DataUtil();
+        SalesBillService salesBillService = new SalesBillService();
+        String result = salesBillService.doDisableSalesBill(webServerUrl, loginstaffid, logininvid, accessKey, accountid, id);
+        Logcat.show(result);
+        FuBaseModel baseModel = dataUtil.message(result);
+        if(baseModel.getResultCode().intValue() ==1){
+            final AlertDialog alert = new AlertDialog.Builder(getContext()) .create();
+            alert.setMessage(baseModel.getMessage());
+            alert.show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    alert.dismiss();
+                }
+            }, 2000);
+            onRefresh();
+        }else if(baseModel.getResultCode().intValue() ==0){
+            DialogUtil.showDialog(getContext(), baseModel.getMessage(), false);
+        }
+    }
+}

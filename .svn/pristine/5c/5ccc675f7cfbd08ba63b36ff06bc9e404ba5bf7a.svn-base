@@ -1,0 +1,445 @@
+/**
+ * 
+ */
+package com.smyhvae.model;
+
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+public class FuSalesBillDetailModel extends FuBaseModel {
+	private Integer salesbillid;
+	private Integer stylecolorsizeid;
+	private BigDecimal price;
+	private Integer amount;
+	private BigDecimal discount;
+	private BigDecimal total;
+	private Integer extramoneyfixid;//额外补差
+	private Integer isscore;//是否是积分明细(0非积分明细, 1是积分明细)
+	private BigDecimal originalprice;
+	private Integer groupcount;
+	private BigDecimal realMoney;//该单据的实收金额
+	
+	private Integer styleid;
+	private Integer colorid;
+	private Integer sizeid;
+	
+	private String styleString;
+	private String colorString;
+	private String sizeString;
+
+	private String styleCode;
+
+	private Integer status;
+
+	private Integer staffid;
+	private Integer invid;
+	private Date occurrencetime;
+	private String classString;
+	
+	private Integer clientid;
+	private String clientString;
+	private String staffString;
+	private String extramoneyfixString;//额外补差string
+	private String opString;
+	private String invString;
+	
+	private Integer salesbillcode;
+	
+	private Integer salesCount;//上货次数
+	private Integer salesCountForCopy;//上货次数
+	private Integer salesAmount;//上货数量
+	private Integer salesAmountForCopy;//上货数量
+	
+	private BigDecimal primeCost;//成本额
+	private BigDecimal profit;//盈利
+	private BigDecimal averagePurchasePrice;//平均进货价
+	private BigDecimal salesPrice;
+	
+	
+	private List<FuStylePriceTypeModel> fuStylePriceTypeModelList;//价格类型
+	
+	private BigDecimal sumArrears;//累计欠款
+	private String paymentString;
+	private Integer groupcountDetail;
+	private String standardbarcode;
+	private List<FuSizeModel> sizeModelList;
+	private Integer totalSizeAmount;
+	
+
+	public Integer getSalesbillid() {
+		return salesbillid;
+	}
+
+	public void setSalesbillid(Integer salesbillid) {
+		this.salesbillid = salesbillid;
+	}
+
+	public Integer getStylecolorsizeid() {
+		return stylecolorsizeid;
+	}
+
+	public void setStylecolorsizeid(Integer stylecolorsizeid) {
+		this.stylecolorsizeid = stylecolorsizeid;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
+
+	public BigDecimal getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(BigDecimal discount) {
+		this.discount = discount;
+	}
+
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
+
+	public Integer getExtramoneyfixid() {
+		return extramoneyfixid;
+	}
+
+	public void setExtramoneyfixid(Integer extramoneyfixid) {
+		this.extramoneyfixid = extramoneyfixid;
+	}
+
+	public Integer getIsscore() {
+		return isscore;
+	}
+
+	public void setIsscore(Integer isscore) {
+		this.isscore = isscore;
+	}
+
+	public BigDecimal getOriginalprice() {
+		return originalprice;
+	}
+
+	public void setOriginalprice(BigDecimal originalprice) {
+		this.originalprice = originalprice;
+	}
+
+	public Integer getGroupcount() {
+		return groupcount;
+	}
+
+	public void setGroupcount(Integer groupcount) {
+		this.groupcount = groupcount;
+	}
+
+	public BigDecimal getRealMoney() {
+		return realMoney;
+	}
+
+	public void setRealMoney(BigDecimal realMoney) {
+		this.realMoney = realMoney;
+	}
+
+	public Integer getStyleid() {
+		return styleid;
+	}
+
+	public void setStyleid(Integer styleid) {
+		this.styleid = styleid;
+	}
+
+	public Integer getColorid() {
+		return colorid;
+	}
+
+	public void setColorid(Integer colorid) {
+		this.colorid = colorid;
+	}
+
+	public Integer getSizeid() {
+		return sizeid;
+	}
+
+	public void setSizeid(Integer sizeid) {
+		this.sizeid = sizeid;
+	}
+
+	public String getStyleString() {
+		return styleString;
+	}
+
+	public void setStyleString(String styleString) {
+		this.styleString = styleString;
+	}
+
+	public String getColorString() {
+		return colorString;
+	}
+
+	public void setColorString(String colorString) {
+		this.colorString = colorString;
+	}
+
+	public String getSizeString() {
+		return sizeString;
+	}
+
+	public void setSizeString(String sizeString) {
+		this.sizeString = sizeString;
+	}
+
+	public String getStyleCode() {
+		return styleCode;
+	}
+
+	public void setStyleCode(String styleCode) {
+		this.styleCode = styleCode;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Integer getStaffid() {
+		return staffid;
+	}
+
+	public void setStaffid(Integer staffid) {
+		this.staffid = staffid;
+	}
+
+	public Integer getInvid() {
+		return invid;
+	}
+
+	public void setInvid(Integer invid) {
+		this.invid = invid;
+	}
+
+	public Date getOccurrencetime() {
+		return occurrencetime;
+	}
+
+	public void setOccurrencetime(Date occurrencetime) {
+		this.occurrencetime = occurrencetime;
+	}
+
+	public String getClassString() {
+		return classString;
+	}
+
+	public void setClassString(String classString) {
+		this.classString = classString;
+	}
+
+	public Integer getClientid() {
+		return clientid;
+	}
+
+	public void setClientid(Integer clientid) {
+		this.clientid = clientid;
+	}
+
+	public String getClientString() {
+		return clientString;
+	}
+
+	public void setClientString(String clientString) {
+		this.clientString = clientString;
+	}
+
+	public String getStaffString() {
+		return staffString;
+	}
+
+	public void setStaffString(String staffString) {
+		this.staffString = staffString;
+	}
+
+	public String getExtramoneyfixString() {
+		return extramoneyfixString;
+	}
+
+	public void setExtramoneyfixString(String extramoneyfixString) {
+		this.extramoneyfixString = extramoneyfixString;
+	}
+
+	public String getOpString() {
+		return opString;
+	}
+
+	public void setOpString(String opString) {
+		this.opString = opString;
+	}
+
+	public String getInvString() {
+		return invString;
+	}
+
+	public void setInvString(String invString) {
+		this.invString = invString;
+	}
+
+	public Integer getSalesbillcode() {
+		return salesbillcode;
+	}
+
+	public void setSalesbillcode(Integer salesbillcode) {
+		this.salesbillcode = salesbillcode;
+	}
+
+	public Integer getSalesCount() {
+		return salesCount;
+	}
+
+	public void setSalesCount(Integer salesCount) {
+		this.salesCount = salesCount;
+	}
+
+	public Integer getSalesCountForCopy() {
+		return salesCountForCopy;
+	}
+
+	public void setSalesCountForCopy(Integer salesCountForCopy) {
+		this.salesCountForCopy = salesCountForCopy;
+	}
+
+	public Integer getSalesAmount() {
+		return salesAmount;
+	}
+
+	public void setSalesAmount(Integer salesAmount) {
+		this.salesAmount = salesAmount;
+	}
+
+	public Integer getSalesAmountForCopy() {
+		return salesAmountForCopy;
+	}
+
+	public void setSalesAmountForCopy(Integer salesAmountForCopy) {
+		this.salesAmountForCopy = salesAmountForCopy;
+	}
+
+	public BigDecimal getPrimeCost() {
+		return primeCost;
+	}
+
+	public void setPrimeCost(BigDecimal primeCost) {
+		this.primeCost = primeCost;
+	}
+
+	public BigDecimal getProfit() {
+		return profit;
+	}
+
+	public void setProfit(BigDecimal profit) {
+		this.profit = profit;
+	}
+
+	public BigDecimal getAveragePurchasePrice() {
+		return averagePurchasePrice;
+	}
+
+	public void setAveragePurchasePrice(BigDecimal averagePurchasePrice) {
+		this.averagePurchasePrice = averagePurchasePrice;
+	}
+
+	public BigDecimal getSalesPrice() {
+		return salesPrice;
+	}
+
+	public void setSalesPrice(BigDecimal salesPrice) {
+		this.salesPrice = salesPrice;
+	}
+
+	public List<FuStylePriceTypeModel> getFuStylePriceTypeModelList() {
+		return fuStylePriceTypeModelList;
+	}
+
+	public void setFuStylePriceTypeModelList(
+			List<FuStylePriceTypeModel> fuStylePriceTypeModelList) {
+		this.fuStylePriceTypeModelList = fuStylePriceTypeModelList;
+	}
+
+	public BigDecimal getSumArrears() {
+		return sumArrears;
+	}
+
+	public void setSumArrears(BigDecimal sumArrears) {
+		this.sumArrears = sumArrears;
+	}
+
+	public String getPaymentString() {
+		return paymentString;
+	}
+
+	public void setPaymentString(String paymentString) {
+		this.paymentString = paymentString;
+	}
+
+	public Integer getGroupcountDetail() {
+		return groupcountDetail;
+	}
+
+	public void setGroupcountDetail(Integer groupcountDetail) {
+		this.groupcountDetail = groupcountDetail;
+	}
+
+	public String getStandardbarcode() {
+		return standardbarcode;
+	}
+
+	public void setStandardbarcode(String standardbarcode) {
+		this.standardbarcode = standardbarcode;
+	}
+
+	public List<FuSizeModel> getSizeModelList() {
+		return sizeModelList;
+	}
+
+	public void setSizeModelList(List<FuSizeModel> sizeModelList) {
+		this.sizeModelList = sizeModelList;
+	}
+
+	public Integer getTotalSizeAmount() {
+		return totalSizeAmount;
+	}
+
+	public void setTotalSizeAmount(Integer totalSizeAmount) {
+		this.totalSizeAmount = totalSizeAmount;
+	}
+
+	@Override
+	public String toString() {
+		return "FuSalesBillDetailModel{" +
+				"price=" + price +
+				", amount=" + amount +
+				", total=" + total +
+				", styleid=" + styleid +
+				", colorid=" + colorid +
+				", sizeid=" + sizeid +
+				", styleString='" + styleString + '\'' +
+				", colorString='" + colorString + '\'' +
+				", sizeString='" + sizeString + '\'' +
+				", styleCode='" + styleCode + '\'' +
+				'}';
+	}
+}

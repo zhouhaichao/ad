@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "D:\\android\\workspaces\\ad\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi\\ic_home_black_24dp.png",
+        "source": "D:\\android\\workspaces\\ad\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_home_black_24dp.png"
+    },
+    {
+        "merged": "D:\\android\\workspaces\\ad\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi\\ic_dashboard_black_24dp.png",
+        "source": "D:\\android\\workspaces\\ad\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_dashboard_black_24dp.png"
+    },
+    {
+        "merged": "D:\\android\\workspaces\\ad\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi\\ic_notifications_black_24dp.png",
+        "source": "D:\\android\\workspaces\\ad\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_notifications_black_24dp.png"
+    }
+]

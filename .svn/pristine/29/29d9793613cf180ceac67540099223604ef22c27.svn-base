@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.smyhvae.myapplication"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="18"
+        android:targetSdkVersion="26" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <meta-data
+        android:name="android.support.VERSION"
+        android:value="26.0.0-alpha1" />
+
+    <application
+        android:name="com.smyhvae.myapplication.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/hd"
+        android:label="启豹"
+        android:roundIcon="@mipmap/hd"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="app_name"
+            android:value="启豹" />
+
+        <activity android:name="com.smyhvae.myapplication.ValidateActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.smyhvae.myapplication.ValidateActivity" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.smyhvae.myapplication.RegeditActivity" />
+        <activity android:name="com.smyhvae.myapplication.ContentActivity" />
+        <activity android:name="com.smyhvae.myapplication.TabActivity" />
+        <activity
+            android:name="com.smyhvae.myapplication.BottomActivity"
+            android:label="@string/title_activity_bottom" />
+
+        <service
+            android:name="com.smyhvae.myapplication.LoginIntentService"
+            android:exported="false" />
+        <service android:name="com.smyhvae.service.ValidateService" />
+
+        <activity
+            android:name="com.smyhvae.myapplication.LoginActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name="com.smyhvae.myapplication.StyleActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.smyhvae.myapplication.MainActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustPan" />
+
+        <service
+            android:name="com.smyhvae.service.RegeditService"
+            android:exported="false" />
+        <service
+            android:name="com.smyhvae.service.HandlerService"
+            android:exported="false" />
+
+        <activity android:name="com.smyhvae.myapplication.AboutUsActivity" />
+        <activity android:name="com.smyhvae.myapplication.HelpActivity" />
+        <activity android:name="com.smyhvae.myapplication.PersonalInfoActivity" />
+        <activity android:name="com.smyhvae.myapplication.ColorSizeActivity" />
+        <activity
+            android:name="com.smyhvae.myapplication.PaymentActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name="com.smyhvae.myapplication.SelectSalesBillActivity" />
+        <activity
+            android:name="com.smyhvae.myapplication.AddStyleActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity android:name="com.smyhvae.myapplication.AddClientActivity" />
+        <activity android:name="com.smyhvae.myapplication.SelectColorActivity" />
+        <activity android:name="com.smyhvae.myapplication.SelectSizeActivity" />
+        <activity android:name="com.smyhvae.myapplication.PrintActivity" />
+
+        <service android:name="com.smyhvae.service.PrintService" />
+
+        <activity
+            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+    </application>
+
+</manifest>

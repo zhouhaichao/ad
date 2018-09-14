@@ -1,0 +1,97 @@
+/**
+ * 
+ */
+package com.smyhvae.model;
+
+public class FuColorModel extends FuBaseModel {
+
+	/**
+	 * 颜色
+	 */
+	private Integer code;
+	private String rgbcode;
+	private Integer groupid;
+	private Integer rank;
+	private Integer status;
+	
+	private String groupString;
+	
+	private Integer isShow;
+	private Integer colorid;
+
+	private Integer selectStatus;
+
+	public Integer getCode() {
+		return code;
+	}
+
+
+	public void setCode(Integer code) {
+		this.code = code;
+	}
+
+	public String getRgbcode() {
+		return rgbcode;
+	}
+
+	public void setRgbcode(String rgbcode) {
+		this.rgbcode = rgbcode;
+	}
+
+	public Integer getGroupid() {
+		return groupid;
+	}
+
+	public void setGroupid(Integer groupid) {
+		this.groupid = groupid;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public String getGroupString() {
+		return groupString;
+	}
+
+	public void setGroupString(String groupString) {
+		this.groupString = groupString;
+	}
+
+	public Integer getRank() {
+		return rank;
+	}
+
+
+	public void setRank(Integer rank) {
+		this.rank = rank;
+	}
+
+	public Integer getIsShow() {
+		return isShow;
+	}
+
+	public void setIsShow(Integer isShow) {
+		this.isShow = isShow;
+	}
+
+	public Integer getColorid() {
+		return colorid;
+	}
+
+	public void setColorid(Integer colorid) {
+		this.colorid = colorid;
+	}
+
+	public Integer getSelectStatus() {
+		return selectStatus;
+	}
+
+	public void setSelectStatus(Integer selectStatus) {
+		this.selectStatus = selectStatus;
+	}
+}

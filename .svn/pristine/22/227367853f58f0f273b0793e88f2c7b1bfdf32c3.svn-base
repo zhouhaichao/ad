@@ -1,0 +1,120 @@
+package com.smyhvae.util;
+
+import java.util.List;
+
+
+public class PageUtil<T> {
+    private int count;//总条数
+    private int currentlyPage; //当前页
+    private int countPage;//总页数
+    private int showCount =20;//显示条数
+    private int firstNum;//起始页
+    private int maxNum;//结束页
+    private List<T> resultList;
+    private boolean firstPage=false; //是否有首页
+    private boolean lastPage = false;//是否有最后1页
+    private boolean hasNextPage=false; //是否有下一页
+    private boolean hasPreviousPage= false;//是否有上一页
+    public boolean isFirstPage() {
+        return firstPage;
+    }
+    public void setFirstPage(boolean firstPage) {
+        this.firstPage = firstPage;
+    }
+    public boolean isLastPage() {
+        return lastPage;
+    }
+    public void setLastPage(boolean lastPage) {
+        this.lastPage = lastPage;
+    }
+
+    public PageUtil() {
+        super();
+    }
+    public PageUtil(int count, int currentlyPage, int countPage, int showCount) {
+        super();
+        this.count = count;
+        this.currentlyPage = currentlyPage;
+        this.countPage = countPage;
+        this.showCount = showCount;
+    }
+
+    public boolean isHasNextPage() {
+        return hasNextPage;
+    }
+    public void setHasNextPage(boolean hasNextPage) {
+        this.hasNextPage = hasNextPage;
+    }
+    public boolean isHasPreviousPage() {
+        return hasPreviousPage;
+    }
+    public void setHasPreviousPage(boolean hasPreviousPage) {
+        this.hasPreviousPage = hasPreviousPage;
+    }
+
+    public int getCount() {
+        return count;
+    }
+    public void setCount(int count) {
+        if(count>0){
+            countPage = (count+showCount-1)/showCount;
+            if(countPage > currentlyPage){
+                hasNextPage = true;
+            }
+            if(currentlyPage >1){
+                hasPreviousPage = true;
+            }
+            if(currentlyPage > 1&& countPage >1){
+                firstPage = true;
+            }
+            if(currentlyPage < countPage && countPage >1){
+                lastPage = true;
+            }
+        }
+        if(currentlyPage>countPage){
+            setCurrentlyPage(countPage);
+        }
+        this.count = count;
+    }
+    public int getCurrentlyPage() {
+        return currentlyPage;
+    }
+    public void setCurrentlyPage(int currentlyPage) {
+        firstNum = ((currentlyPage == 0? 1:currentlyPage)-1)*showCount;
+        maxNum = (currentlyPage == 0? 1:currentlyPage)*showCount;
+        this.currentlyPage = currentlyPage;
+    }
+
+    public int getCountPage() {
+        return countPage;
+    }
+    public void setCountPage(int countPage) {
+        this.countPage = countPage;
+    }
+    public int getShowCount() {
+        return showCount;
+    }
+    public void setShowCount(int showCount) {
+        this.showCount = showCount;
+    }
+
+    public int getFirstNum() {
+        return firstNum;
+    }
+    public void setFirstNum(int firstNum) {
+        this.firstNum = firstNum;
+    }
+    public int getMaxNum() {
+        return maxNum;
+    }
+    public void setMaxNum(int maxNum) {
+        this.maxNum = maxNum;
+    }
+
+    public List<T> getResultList() {
+        return resultList;
+    }
+    public void setResultList(List<T> resultList) {
+        this.resultList = resultList;
+    }
+}

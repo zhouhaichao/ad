@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="#FFE6D9">
+
+    <TextView
+        android:id="@+id/text_id"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:gravity="center"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:singleLine="true"
+        android:text="图片" />
+
+    <TextView
+        android:id="@+id/text_goods_name"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:singleLine="true"
+        android:gravity="center"
+        android:text="货品信息" />
+
+    <TextView
+        android:id="@+id/text_num"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip"
+        android:textColor="#000000"
+        android:singleLine="true"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:text="数量" />
+
+    <TextView
+        android:id="@+id/text_curPrice"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:paddingBottom="10dip"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:singleLine="true"
+        android:paddingTop="10dip"
+        android:gravity="center"
+        android:text="单价" />
+
+
+    <TextView
+        android:id="@+id/text_curDiscount"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:paddingBottom="10dip"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:singleLine="true"
+        android:paddingTop="10dip"
+        android:gravity="center"
+        android:text="折扣" />
+
+
+    <TextView
+        android:id="@+id/text_money"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:paddingBottom="10dip"
+        android:singleLine="true"
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:paddingTop="10dip"
+        android:gravity="center"
+        android:text="金额" />
+
+</LinearLayout>
